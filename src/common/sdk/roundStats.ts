@@ -1,5 +1,10 @@
 import {RoundStat, TournamentRound, TournamentStat, RoundMap} from "./types";
 import roundStats from './data/round-stats.json'
+import roundStatsSummary from './data/round-stats-summary.json'
+import {RoundStatsSummaryResponse} from "@common/sdk/types/RoundStatsSummaryResponse";
+
+export const fetchRoundStatsSummary = async (): Promise<RoundStatsSummaryResponse> =>
+  new Promise(resolve => resolve(roundStatsSummary as any))
 
 export const fetchRoundHistory = async (): Promise<TournamentStat[]> => {
   const tournamentMap: Record<string, RoundStat[]> = {}

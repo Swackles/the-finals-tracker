@@ -1,0 +1,142 @@
+{
+  "casual": {
+    "damagePerItem": {
+      "-657541680": 113093.08,
+      "432758549": 634.6239,
+      "473278792": 34026.28,
+      "81925953": 1085
+    },
+    "deaths": 314,
+    "highestFameAmount": 0,
+    "kills": 436,
+    "killsPerItem": {
+      "-657541680": 302,
+      "473278792": 101,
+      "81925953": 2
+    },
+    "revivesDone": 108,
+    "roundWinRate": 0.328125,
+    "roundWinRatePerArchetype": {
+      "": 0,
+      "DA_Archetype_Medium": 0.6363636,
+      "DA_Archetype_Small": 0.26923078
+    },
+    "roundsCompleted": 61,
+    "roundsPlayed": 61,
+    "timePlayed": 42840539,
+    "timePlayedPerArchetype": {
+      "": 665841,
+      "DA_Archetype_Medium": 7918548,
+      "DA_Archetype_Small": 34256150
+    },
+    "totalCashOut": 580000,
+    "tournamentWinRate": 0,
+    "tournamentWinRatePerArchetype": {}
+  },
+  "ranked": {
+    "damagePerItem": {
+      "-160507163": 83920.79,
+      "-351094439": 140.62982,
+      "-455578974": 16242.024,
+      "-657541680": 10711.822,
+      "1042541498": 19645.297,
+      "1743942098": 17811.453,
+      "1886362451": 11459.3545,
+      "207168914": 3684.775,
+      "473278792": 137698.53,
+      "81925953": 195
+    },
+    "deaths": 778,
+    "highestFameAmount": 0,
+    "kills": 824,
+    "killsPerItem": {
+      "-160507163": 298,
+      "-455578974": 32,
+      "-657541680": 23,
+      "1042541498": 29,
+      "1743942098": 44,
+      "1886362451": 19,
+      "207168914": 4,
+      "473278792": 335
+    },
+    "revivesDone": 320,
+    "roundWinRate": 0.50289017,
+    "roundWinRatePerArchetype": {
+      "": 1,
+      "DA_Archetype_Heavy": 0.49315068,
+      "DA_Archetype_Medium": 0.5217391,
+      "DA_Archetype_Small": 0.16666667
+    },
+    "roundsCompleted": 173,
+    "roundsPlayed": 173,
+    "timePlayed": 98225330,
+    "timePlayedPerArchetype": {
+      "": 1201985,
+      "DA_Archetype_Heavy": 41199475,
+      "DA_Archetype_Medium": 52334864,
+      "DA_Archetype_Small": 3489006
+    },
+    "totalCashOut": 3111514,
+    "tournamentWinRate": 0.046242774,
+    "tournamentWinRatePerArchetype": {
+      "": 0,
+      "DA_Archetype_Heavy": 0.04109589,
+      "DA_Archetype_Medium": 0.054347824,
+      "DA_Archetype_Small": 0
+    }
+  },
+  "total": {
+    "damagePerItem": {
+      "-160507163": 83920.79,
+      "-351094439": 140.62982,
+      "-455578974": 16242.024,
+      "-657541680": 123804.9,
+      "1042541498": 19645.297,
+      "1743942098": 17811.453,
+      "1886362451": 11459.3545,
+      "207168914": 3684.775,
+      "432758549": 634.6239,
+      "473278792": 171724.8,
+      "81925953": 1280
+    },
+    "deaths": 1092,
+    "highestFameAmount": 0,
+    "kills": 1260,
+    "killsPerItem": {
+      "-160507163": 298,
+      "-455578974": 32,
+      "-657541680": 325,
+      "1042541498": 29,
+      "1743942098": 44,
+      "1886362451": 19,
+      "207168914": 4,
+      "473278792": 436,
+      "81925953": 2
+    },
+    "revivesDone": 428,
+    "roundWinRate": 0.4556962,
+    "roundWinRatePerArchetype": {
+      "": 0.6666667,
+      "DA_Archetype_Heavy": 0.49315068,
+      "DA_Archetype_Medium": 0.5339806,
+      "DA_Archetype_Small": 0.25862068
+    },
+    "roundsCompleted": 234,
+    "roundsPlayed": 234,
+    "timePlayed": 141065869,
+    "timePlayedPerArchetype": {
+      "": 1867826,
+      "DA_Archetype_Heavy": 41199475,
+      "DA_Archetype_Medium": 60253412,
+      "DA_Archetype_Small": 37745156
+    },
+    "totalCashOut": 3691514,
+    "tournamentWinRate": 0.046242774,
+    "tournamentWinRatePerArchetype": {
+      "": 0,
+      "DA_Archetype_Heavy": 0.04109589,
+      "DA_Archetype_Medium": 0.054347824,
+      "DA_Archetype_Small": 0
+    }
+  }
+}
