@@ -10,10 +10,13 @@ function App() {
   const [auth, setAuth] = useState(!!getAuthenticationToken())
 
   useEffect(() => {
-    const resInterceptor = API.interceptors.response.use(res => {
-      if (res.status === 401) setAuth(false)
-
-      return res
+    const resInterceptor = API.interceptors.response.use(
+      res => res,
+      (err) => {
+        if (err.response.status.status === 401) {
+          setAuth(false)
+          saveAuthenticationToken()
+        }
     })
 
     return () => API.interceptors.response.eject(resInterceptor);
