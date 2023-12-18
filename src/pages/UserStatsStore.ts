@@ -90,6 +90,6 @@ export class UserStatsStore {
   }
 
   @action setGameType = (gameType: keyof RoundStatsSummaryResponse) => this._gameType = gameType
-  @action private setStats = (stats: RoundStatsSummaryResponse) => this._stats = stats
+  @action private setStats = (stats: RoundStatsSummaryResponse | undefined) => this._stats = stats
   @action private setTournaments = (tournaments: TournamentStat[]) => this._tournaments = tournaments
 }

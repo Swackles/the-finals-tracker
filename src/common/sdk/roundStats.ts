@@ -1,14 +1,20 @@
-import {RoundStat, TournamentRound, TournamentStat, RoundMap} from "./types";
-import roundStats from './data/round-stats.json'
-import roundStatsSummary from './data/round-stats-summary.json'
+import {RoundStat, TournamentRound, TournamentStat, RoundMap, RoundStatsResponse} from "./types";
 import {RoundStatsSummaryResponse} from "@common/sdk/types/RoundStatsSummaryResponse";
+import {API} from "./api";
 
-export const fetchRoundStatsSummary = async (): Promise<RoundStatsSummaryResponse> =>
-  new Promise(resolve => resolve(roundStatsSummary as any))
+export const fetchRoundStatsSummary = async (): Promise<RoundStatsSummaryResponse | undefined> => {
+  try {
+    return (await API.get<RoundStatsSummaryResponse>("/v1/discovery/roundstatsummary")).data
+  } catch (e) {
+    console.error(e)
+  }
+}
 
 export const fetchRoundHistory = async (): Promise<TournamentStat[]> => {
+  const data =  (await API.get<RoundStatsResponse>("/v1/discovery/roundstats")).data
+
   const tournamentMap: Record<string, RoundStat[]> = {}
-  for (const roundStat of roundStats.roundStats) {
+  for (const roundStat of data.roundStats) {
     if (tournamentMap[roundStat.tournamentId] === undefined) tournamentMap[roundStat.tournamentId] = [roundStat]
     else tournamentMap[roundStat.tournamentId].push(roundStat)
   }
