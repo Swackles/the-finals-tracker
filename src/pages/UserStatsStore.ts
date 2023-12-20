@@ -3,6 +3,7 @@ import {fetchRoundHistory, fetchRoundStatsSummary, TournamentStat} from "@common
 import {RoundStatsSummary, RoundStatsSummaryResponse} from "@common/sdk/types/RoundStatsSummaryResponse";
 import {ClassesTableRow, WeaponsTableRow} from "./cards";
 import {msToTimeString} from "@common/util";
+import {DonutChartData} from "@common/components";
 
 export class UserStatsStore {
   @observable.ref protected _stats?: RoundStatsSummaryResponse = undefined
@@ -78,6 +79,29 @@ export class UserStatsStore {
         roundWinRate: this.getPercentage(roundWinRatePerArchetype.DA_Archetype_Heavy)
       }
     ]
+  }
+
+  @computed
+  get getTimePlayed(): DonutChartData[] {
+    return [
+      {
+        legend: "???",
+        value: this._stats![this._gameType].timePlayedPerArchetype[""] || 0
+      },
+      {
+        legend: "Light",
+        value: this._stats![this._gameType].timePlayedPerArchetype.DA_Archetype_Small || 0
+      },
+      {
+        legend: "Medium",
+        value: this._stats![this._gameType].timePlayedPerArchetype.DA_Archetype_Medium || 0
+      },
+      {
+        legend: "Light",
+        value: this._stats![this._gameType].timePlayedPerArchetype.DA_Archetype_Heavy || 0
+      }
+    ]
+    
   }
 
   @computed

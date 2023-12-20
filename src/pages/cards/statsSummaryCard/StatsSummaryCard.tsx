@@ -3,14 +3,16 @@ import {RoundStatsSummary} from "@common/sdk/types/RoundStatsSummaryResponse";
 import {StatsSummaryCardBasicInfo} from "./StatsSummaryCardBasicInfo";
 import {WeaponsTableCard, WeaponsTableRow} from "./WeaponsTableCard";
 import {ClassesTableCard, ClassesTableRow} from "./ClassesTableCard";
+import {DonutChartData} from "@common/components";
 
 export interface StatsSummaryCardProps {
   data: RoundStatsSummary
   weaponTableData: WeaponsTableRow[]
   classesTableData: ClassesTableRow[]
+  timePlayed: DonutChartData[]
 }
 
-export const StatsSummaryCard = ({ data, weaponTableData, classesTableData }: StatsSummaryCardProps) => {
+export const StatsSummaryCard = ({ data, weaponTableData, classesTableData, timePlayed }: StatsSummaryCardProps) => {
   return (
     <Card variant="plain">
       <Stack
@@ -29,7 +31,7 @@ export const StatsSummaryCard = ({ data, weaponTableData, classesTableData }: St
           </Stack>
         </Grid>
         <Grid xs={5}>
-          <StatsSummaryCardBasicInfo data={data} />
+          <StatsSummaryCardBasicInfo data={data} timePlayed={timePlayed} />
         </Grid>
       </Stack>
     </Card>

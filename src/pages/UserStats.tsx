@@ -40,7 +40,8 @@ export const UserStats = observer(() => {
         <StatsSummaryCard
           data={store.statsSummary}
           weaponTableData={store.weaponTableRows}
-          classesTableData={store.getClassesTableRows}/>
+          classesTableData={store.getClassesTableRows}
+          timePlayed={store.getTimePlayed}/>
       </Grid>
       <Grid container
             direction="column"

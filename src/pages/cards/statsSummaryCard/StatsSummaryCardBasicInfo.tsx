@@ -2,17 +2,15 @@ import {AspectRatio, Card, Divider, Grid, Stack, Typography} from "@mui/joy";
 import {RoundStatsSummary} from "@common/sdk/types/RoundStatsSummaryResponse";
 import {StatCard} from "./StatCard";
 import {useMemo} from "react";
-import {msToTimeString} from "@common/util";
+import {TimePlayedCard} from "./TimePlayedCard";
+import {DonutChartData} from "@common/components";
 
 export interface StatsSummaryCardBasicInfoProps {
   data: RoundStatsSummary
+  timePlayed: DonutChartData[]
 }
 
-export const StatsSummaryCardBasicInfo = ({ data }: StatsSummaryCardBasicInfoProps) => {
-  const timePlayed = useMemo(
-    () => msToTimeString(data.timePlayed),
-    [data.timePlayed])
-
+export const StatsSummaryCardBasicInfo = ({ data, timePlayed }: StatsSummaryCardBasicInfoProps) => {
   const cashoutAmount = useMemo(() => {
     const amount = data.totalCashOut.toString()
     .split("").reverse().join("")
@@ -71,7 +69,7 @@ export const StatsSummaryCardBasicInfo = ({ data }: StatsSummaryCardBasicInfoPro
           </AspectRatio>
         </Card>
       </Grid>
-      <StatCard title="Played" md={12} value={timePlayed} />
+      <TimePlayedCard data={timePlayed} />
       <StatCard title="Cashout" md={12} value={cashoutAmount} />
     </Stack>
   )
