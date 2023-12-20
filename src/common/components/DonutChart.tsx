@@ -93,7 +93,7 @@ export const DonutChart = ({ data, labelGenerator }: DonutChartProps) => {
       svg.append("text")
         .attr("text-anchor", "middle")
         .text(labelGenerator(data.map(x => x.value).reduce((a, b) => a + b, 0)));
-    }, [data])
+    }, [data, colors, labelGenerator])
 
 
     return (
