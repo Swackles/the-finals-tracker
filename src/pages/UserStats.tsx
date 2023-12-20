@@ -3,9 +3,18 @@ import {useStore} from "@common/stores";
 import {Grid, Tab, tabClasses, TabList, Tabs} from "@mui/joy";
 import {observer} from "mobx-react";
 import {StatsSummaryCard, TournamentCard} from "./cards";
+import {useEffect} from "react";
 
-export const UserStats = observer(() => {
+export interface UserStatsProps {
+  isMocked: boolean
+}
+
+export const UserStats = observer(({ isMocked }: UserStatsProps) => {
   const store = useStore(UserStatsStore.new)
+
+  useEffect(() => {
+    store.fetchData(isMocked)
+  }, [store, isMocked])
 
   if (store.isLoading) return <></>
 

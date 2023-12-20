@@ -1,8 +1,17 @@
 import {RoundStat, TournamentRound, TournamentStat, RoundMap, RoundStatsResponse} from "./types";
 import {RoundStatsSummaryResponse} from "@common/sdk/types/RoundStatsSummaryResponse";
 import {API} from "./api";
+import mockedRoundStats from "./data/round-stats.json"
+import mockedRoundStatsSummary from "./data/round-stats-summary.json"
+import {AxiosResponse} from "axios";
 
-export const fetchRoundStatsSummary = async (): Promise<RoundStatsSummaryResponse | undefined> => {
+export interface RequestProps {
+  isMocked?: boolean
+}
+
+export const fetchRoundStatsSummary = async (props?: RequestProps): Promise<RoundStatsSummaryResponse | undefined> => {
+  if (props?.isMocked) return new Promise((res) => res(mockedRoundStatsSummary as any))
+
   try {
     return (await API.get<RoundStatsSummaryResponse>("/v1/discovery/roundstatsummary")).data
   } catch (e) { console.error(e) }
@@ -10,8 +19,12 @@ export const fetchRoundStatsSummary = async (): Promise<RoundStatsSummaryRespons
   return undefined
 }
 
-export const fetchRoundHistory = async (): Promise<TournamentStat[]> => {
-  const res = await API.get<RoundStatsResponse>("/v1/discovery/roundstats")
+export const fetchRoundHistory = async (props?: RequestProps): Promise<TournamentStat[]> => {
+  let res: AxiosResponse<RoundStatsResponse>
+
+  if (props?.isMocked) res = { data: mockedRoundStats } as any
+  else res = await API.get<RoundStatsResponse>("/v1/discovery/roundstats")
+
   if (res === undefined) return []
 
   const tournamentMap: Record<string, RoundStat[]> = {}

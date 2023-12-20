@@ -16,9 +16,9 @@ export class UserStatsStore {
     makeObservable(this)
   }
 
-  async init() {
-    this.setStats(await fetchRoundStatsSummary())
-    this.setTournaments(await fetchRoundHistory())
+  async fetchData(isMocked: boolean) {
+    this.setStats(await fetchRoundStatsSummary({isMocked}))
+    this.setTournaments(await fetchRoundHistory({ isMocked }))
   }
 
   @computed
