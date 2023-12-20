@@ -43,7 +43,7 @@ export const WeaponsTableCard = ({ data }: WeaponsTableProps) => {
                   justifyContent="flex-start"
                   alignItems="center"
                   spacing={2}>
-                  <img alt={getWeaponNameFromId(x.id)} style={{ width: 60, height: 60}} src={`/images/weapons/${getWeaponNameFromId(x.id).replaceAll(" ", "-")}.png`}/>
+                  <img alt={getWeaponNameFromId(x.id)} style={{ width: 60, height: 60}} src={`/images/weapons/${getWeaponNameFromId(x.id).replaceAll(" ", "-").replaceAll(".", "")}.png`}/>
                   <Typography>{getWeaponNameFromId(x.id)}</Typography>
                 </Stack>
               </td>
