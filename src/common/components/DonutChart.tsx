@@ -13,9 +13,9 @@ export interface DonutChartProps {
 
 export const DonutChart = ({ data, labelGenerator }: DonutChartProps) => {
   const div = useRef<HTMLDivElement | null>(null)
-  const colors = [ '#8ce8ad', '#57e188', '#34c768', '#2db757', '#27acaa', '#42c9c2', '#60e6e1', '#93f0e6', '#87d3f2', '#4ebeeb', '#35a4e8', '#188ce5', '#542ea5', '#724bc3', '#9c82d4', '#c981b2', '#b14891', '#ff6d00', '#ff810a', '#ff9831', '#ffb46a', '#ff9a91', '#ff736a', '#f95d54', '#ff4136', '#c4c4cd' ];
-
     useEffect(()=> {
+      const colors = [ '#e88c8c', '#e15757', '#c73434', '#b72d2d'];
+
       const svgContainer = d3.select(div.current).node();
       if (!svgContainer) return
 
@@ -93,7 +93,7 @@ export const DonutChart = ({ data, labelGenerator }: DonutChartProps) => {
       svg.append("text")
         .attr("text-anchor", "middle")
         .text(labelGenerator(data.map(x => x.value).reduce((a, b) => a + b, 0)));
-    }, [data, colors, labelGenerator])
+    }, [data, labelGenerator])
 
 
     return (
