@@ -1,12 +1,12 @@
 import {AspectRatio, Card, Divider, Grid, Stack, Typography} from "@mui/joy";
-import {RoundStatsSummary} from "@common/sdk/types/RoundStatsSummaryResponse";
+import {GameStats} from "@common/sdk/finals-tracker";
 import {StatCard} from "./StatCard";
 import {useMemo} from "react";
 import {TimePlayedCard} from "./TimePlayedCard";
 import {DonutChartData} from "@common/components";
 
 export interface StatsSummaryCardBasicInfoProps {
-  data: RoundStatsSummary
+  data: GameStats
   timePlayed: DonutChartData[]
 }
 

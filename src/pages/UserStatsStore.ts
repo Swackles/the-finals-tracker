@@ -1,14 +1,19 @@
 import {action, computed, makeObservable, observable} from "mobx";
-import {fetchRoundHistory, fetchRoundStatsSummary, TournamentStat} from "@common/sdk";
-import {RoundStatsSummary, RoundStatsSummaryResponse} from "@common/sdk/types/RoundStatsSummaryResponse";
 import {ClassesTableRow, WeaponsTableRow} from "./cards";
+import {
+  FinalsTrackerResponse,
+  GameMode,
+  GameStats,
+  GameStatsResponse, TournamentStat,
+  WeaponGameStats
+} from "@common/sdk/finals-tracker/models";
+import {fetchGameStats} from "@common/sdk/finals-tracker";
 import {msToTimeString} from "@common/util";
 import {DonutChartData} from "@common/components";
 
 export class UserStatsStore {
-  @observable.ref protected _stats?: RoundStatsSummaryResponse = undefined
-  @observable.ref protected _tournaments: TournamentStat[] = []
-  @observable.ref protected _gameType: keyof RoundStatsSummaryResponse = "total"
+  @observable.ref protected _stats?: FinalsTrackerResponse<GameStatsResponse> = undefined
+  @observable.ref protected _gameMode: GameMode = GameMode.TOTAL
 
   static new = () => new UserStatsStore()
 
@@ -16,9 +21,8 @@ export class UserStatsStore {
     makeObservable(this)
   }
 
-  async fetchData(isMocked: boolean) {
-    this.setStats(await fetchRoundStatsSummary({isMocked}))
-    this.setTournaments(await fetchRoundHistory({ isMocked }))
+  async fetchData(token: string | undefined = undefined, json: any = undefined) {
+    this.setStats(await fetchGameStats(token, json))
   }
 
   @computed
@@ -27,93 +31,56 @@ export class UserStatsStore {
   }
 
   @computed
-  get gameType(): keyof RoundStatsSummaryResponse {
-    return this._gameType
+  get gameMode(): GameMode {
+    return this._gameMode
   }
 
   @computed
-  get statsSummary(): RoundStatsSummary {
-    return this._stats![this._gameType]
+  get statsSummary(): GameStats {
+    return this.gameStats
   }
 
   @computed
   get weaponTableRows(): WeaponsTableRow[] {
-    const tableData: WeaponsTableRow[] = []
-
-    for (const [id, damage] of Object.entries(this._stats![this._gameType].damagePerItem)) {
-      tableData.push({id, damage})
-    }
-
-    for (const [id, kills] of Object.entries(this._stats![this._gameType].killsPerItem)) {
-      tableData.find(x => x.id === id)!.kills = kills
-    }
-
-    return tableData
+    return this.gameStats.weapons.map(weapon => ({
+      id: weapon.name,
+      damage: weapon.damage,
+      kills: weapon.kills
+    }))
   }
 
   @computed
   get getClassesTableRows(): ClassesTableRow[] {
-    const {
-      roundWinRatePerArchetype,
-      timePlayedPerArchetype,
-      tournamentWinRatePerArchetype
-    } = this._stats![this._gameType]
-
-    return [
-      {
-        class: "Light",
-        timePlayed: msToTimeString(timePlayedPerArchetype.DA_Archetype_Small),
-        tournamentWinRate: this.getPercentage(tournamentWinRatePerArchetype.DA_Archetype_Small),
-        roundWinRate: this.getPercentage(roundWinRatePerArchetype.DA_Archetype_Small)
-      },
-      {
-        class: "Medium",
-        timePlayed: msToTimeString(timePlayedPerArchetype.DA_Archetype_Medium),
-        tournamentWinRate: this.getPercentage(tournamentWinRatePerArchetype.DA_Archetype_Medium),
-        roundWinRate: this.getPercentage(roundWinRatePerArchetype.DA_Archetype_Medium)
-      },
-      {
-        class: "Light",
-        timePlayed: msToTimeString(timePlayedPerArchetype.DA_Archetype_Heavy),
-        tournamentWinRate: this.getPercentage(tournamentWinRatePerArchetype.DA_Archetype_Heavy),
-        roundWinRate: this.getPercentage(roundWinRatePerArchetype.DA_Archetype_Heavy)
-      }
-    ]
+    return this.gameStats.archetypes.map(archetype => ({
+      class: archetype.type,
+      timePlayed: msToTimeString(archetype.timePlayed),
+      tournamentWinRate: this.getPercentage(archetype.tournamentWinRate),
+      roundWinRate: this.getPercentage(archetype.roundWinRate)
+    }))
   }
 
   @computed
   get getTimePlayed(): DonutChartData[] {
-    return [
-      {
-        legend: "???",
-        value: this._stats![this._gameType].timePlayedPerArchetype[""] || 0
-      },
-      {
-        legend: "Light",
-        value: this._stats![this._gameType].timePlayedPerArchetype.DA_Archetype_Small || 0
-      },
-      {
-        legend: "Medium",
-        value: this._stats![this._gameType].timePlayedPerArchetype.DA_Archetype_Medium || 0
-      },
-      {
-        legend: "Light",
-        value: this._stats![this._gameType].timePlayedPerArchetype.DA_Archetype_Heavy || 0
-      }
-    ]
-    
+    return this.gameStats.archetypes.map(archetype => ({
+      legend: archetype.type,
+      value: archetype.timePlayed || 0
+    }))
   }
 
   @computed
   get tournaments(): TournamentStat[] {
-    return this._tournaments
+    return this._stats!.data?.tournaments || []
+  }
+
+  @computed
+  private get gameStats(): GameStats {
+    return this._stats!.data!.stats.find(stat => stat.gameMode === this._gameMode) as GameStats
   }
 
   private getPercentage(value?: number) {
     return `${value ? Math.round(value * 100) / 100 : 0}%`
   }
 
-  @action setGameType = (gameType: keyof RoundStatsSummaryResponse) => this._gameType = gameType
-  @action private setStats = (stats: RoundStatsSummaryResponse | undefined) => this._stats = stats
-  @action private setTournaments = (tournaments: TournamentStat[]) => this._tournaments = tournaments
+  @action setGameType = (gameMode: GameMode) => this._gameMode = gameMode
+  @action private setStats = (stats: FinalsTrackerResponse<GameStatsResponse> | undefined) => this._stats = stats
 }

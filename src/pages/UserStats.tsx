@@ -4,6 +4,7 @@ import {Grid, Tab, tabClasses, TabList, Tabs} from "@mui/joy";
 import {observer} from "mobx-react";
 import {StatsSummaryCard, TournamentCard} from "./cards";
 import {useEffect} from "react";
+import MockedGameStats from "@common/data/mockedGameStats.json"
 
 export interface UserStatsProps {
   isMocked: boolean
@@ -13,7 +14,7 @@ export const UserStats = observer(({ isMocked }: UserStatsProps) => {
   const store = useStore(UserStatsStore.new)
 
   useEffect(() => {
-    store.fetchData(isMocked)
+    store.fetchData(undefined, isMocked ? MockedGameStats : undefined)
   }, [store, isMocked])
 
   if (store.isLoading) return <></>
@@ -23,7 +24,7 @@ export const UserStats = observer(({ isMocked }: UserStatsProps) => {
       <Grid xs={12}>
         <Tabs
           aria-label="tabs"
-          defaultValue={store.gameType}
+          defaultValue={store.gameMode}
           sx={{ bgcolor: 'transparent' }}
           onChange={(_, value) => store.setGameType(value as any)}>
           <TabList

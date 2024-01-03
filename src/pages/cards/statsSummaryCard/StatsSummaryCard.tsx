@@ -1,12 +1,12 @@
 import {Card, Grid, Stack} from "@mui/joy";
-import {RoundStatsSummary} from "@common/sdk/types/RoundStatsSummaryResponse";
+import {GameStats} from "@common/sdk/finals-tracker";
 import {StatsSummaryCardBasicInfo} from "./StatsSummaryCardBasicInfo";
 import {WeaponsTableCard, WeaponsTableRow} from "./WeaponsTableCard";
 import {ClassesTableCard, ClassesTableRow} from "./ClassesTableCard";
 import {DonutChartData} from "@common/components";
 
 export interface StatsSummaryCardProps {
-  data: RoundStatsSummary
+  data: GameStats
   weaponTableData: WeaponsTableRow[]
   classesTableData: ClassesTableRow[]
   timePlayed: DonutChartData[]

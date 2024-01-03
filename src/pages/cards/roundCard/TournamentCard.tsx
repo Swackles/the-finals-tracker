@@ -1,4 +1,4 @@
-import {TournamentStat} from "@common/sdk";
+import {TournamentStat} from "@common/sdk/finals-tracker";
 import {Grid} from "@mui/material";
 import {RoundCard} from "./RoundCard";
 

@@ -1,5 +1,5 @@
 import {AspectRatio, Card, CardContent, CardOverflow, Divider, Typography} from "@mui/joy";
-import {TournamentRound} from "@common/sdk";
+import {TournamentRound} from "@common/sdk/finals-tracker";
 
 export interface RoundCardProps {
   data: TournamentRound
