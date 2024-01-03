@@ -1,40 +1,61 @@
-import {AspectRatio, Card, CardContent, CardOverflow, Divider, Typography} from "@mui/joy";
+import {AspectRatio, Card, CardContent, CardOverflow, Divider, Skeleton, Stack, Typography} from "@mui/joy";
 import {TournamentRound} from "@common/sdk/finals-tracker";
+import React from "react";
+import {RoundCardText} from "./RoundCardText"
+import {getMapVariant} from "@common/util";
 
 export interface RoundCardProps {
-  data: TournamentRound
+  data?: TournamentRound
 }
 
 export const RoundCard = ({ data }: RoundCardProps) => {
+  const isLoading = !data
+
   return (
-    <Card variant="outlined" sx={{mt: 3}}>
+    <Card variant="outlined" sx={{mt: 3, width: 350}}>
       <CardOverflow>
-        <AspectRatio ratio="2">
-          <img
-            src={`/images/maps/${data.map}.png`}
-            loading="lazy"
-            alt={data.map}
-          />
+        <AspectRatio ratio="16/9">
+          <Skeleton animation={false} loading={isLoading}>
+            <img
+              src={data ? `/images/maps/${data.map}.png` : ""}
+              loading="lazy"
+              alt={data?.map || "loading..."}
+            />
+          </Skeleton>
         </AspectRatio>
-        <Typography style={{
-          width: "100%",
-          top: "10px",
-          left: "0",
-          textShadow: "1px 1px 5px white",
-          position: "absolute",
-          textAlign: "center"
-        }}  level="h2" color={data.won ? "success" : "danger"}>{data.won ? "WIN" : "LOSS"}</Typography>
+        {data &&
+            <Typography style={{
+              width: "100%",
+              top: "10px",
+              left: "0",
+              textShadow: "1px 1px 5px white",
+              position: "absolute",
+              textAlign: "center"
+            }}  level="h4" color={data.won ? "success" : "danger"}>{getMapVariant(data.map)}</Typography>
+        }
         <Divider inset="context" />
         <CardContent orientation="horizontal">
-          <Typography level="body-xs">{Math.round(data.kills / data.deaths * 100) / 100} k/d</Typography>
-          <Divider orientation="vertical" />
-          <Typography level="body-xs">{data.kills} kills</Typography>
-          <Divider orientation="vertical" />
-          <Typography level="body-xs">{data.deaths} deaths</Typography>
-          <Divider orientation="vertical" />
-          <Typography level="body-xs">{data.respawns} respawns</Typography>
-          <Divider orientation="vertical" />
-          <Typography level="body-xs">{data.revives} revives</Typography>
+          <Stack sx={{ width: "100%" }}
+                 direction="row"
+                 alignItems="center"
+                 divider={<Divider orientation="vertical" />}
+                 justifyContent="space-around" >
+            <RoundCardText isLoading={isLoading}
+                           firstRow={data ? Math.round(data.kills / data.deaths * 100) / 100 : 0}
+                           secondRowRow="k/d" />
+            <RoundCardText isLoading={isLoading}
+                           firstRow={data ? data.kills : 0}
+                           secondRowRow="kills" />
+            <RoundCardText isLoading={isLoading}
+                           firstRow={data ? data.deaths : 0}
+                           secondRowRow="deaths" />
+            <RoundCardText isLoading={isLoading}
+                           firstRow={data ? data.respawns : 0}
+                           secondRowRow="respawns" />
+            <RoundCardText isLoading={isLoading}
+                           firstRow={data ? data.revives : 0}
+                           secondRowRow="revives" />
+          </Stack>
         </CardContent>
       </CardOverflow>
     </Card>

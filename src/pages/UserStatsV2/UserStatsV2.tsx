@@ -43,7 +43,7 @@ export const UserStatsV2 = observer(({ isMocked }: UserStatsProps) => {
                 gap: 1,
             }}
         >
-            <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', gap: 1 }}>
                 {store.activeTab !== "match-history" && <GameModeTabs gameMode={store.gameMode} onGameModeChange={store.setGameMode}/>}
                 {store.activeTab === "overview" && <OverviewPanel
                     data={store.statsSummary}
