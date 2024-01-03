@@ -1,5 +1,4 @@
 import {action, computed, makeObservable, observable} from "mobx";
-import {ClassesTableRow, WeaponsTableRow} from "./../cards";
 import {
   FinalsTrackerResponse,
   GameMode,
@@ -9,6 +8,8 @@ import {
 import {fetchGameStats} from "@common/sdk/finals-tracker";
 import {msToTimeString} from "@common/util";
 import {DonutChartData} from "@common/components";
+import {WeaponsTableRow} from "./panels/weaponsPanel/WeaponsTableCard";
+import {ClassesTableRow} from "./panels/overviewPanel/ClassesTableCard";
 
 export class UserStatsV2Store {
   @observable.ref protected _stats?: FinalsTrackerResponse<GameStatsResponse> = undefined
