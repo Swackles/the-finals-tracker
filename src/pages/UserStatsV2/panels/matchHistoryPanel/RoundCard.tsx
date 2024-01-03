@@ -7,7 +7,7 @@ export interface RoundCardProps {
 
 export const RoundCard = ({ data }: RoundCardProps) => {
   return (
-    <Card variant="outlined" sx={{ width: "100%" , mt: 3}}>
+    <Card variant="outlined" sx={{mt: 3}}>
       <CardOverflow>
         <AspectRatio ratio="2">
           <img
@@ -19,9 +19,10 @@ export const RoundCard = ({ data }: RoundCardProps) => {
         <Typography style={{
           width: "100%",
           top: "10px",
-          left: "0px",
+          left: "0",
           textShadow: "1px 1px 5px white",
-          position: "absolute"
+          position: "absolute",
+          textAlign: "center"
         }}  level="h2" color={data.won ? "success" : "danger"}>{data.won ? "WIN" : "LOSS"}</Typography>
         <Divider inset="context" />
         <CardContent orientation="horizontal">

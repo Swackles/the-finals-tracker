@@ -15,8 +15,7 @@ export const WeaponsTableCard = ({ data }: WeaponsTableProps) => {
   return (
     <Card
       variant="outlined"
-      orientation="vertical"
-      sx={{ width: "100%" }}>
+      orientation="vertical" >
       <CardOverflow sx={{ padding: 0 }}>
         <Table
           sx={{ '& tr > *:not(:first-child)': { textAlign: 'center' }, '& tr > *:first-child': { textAlign: 'left' } }}

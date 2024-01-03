@@ -1,21 +1,21 @@
 import {action, computed, makeObservable, observable} from "mobx";
-import {ClassesTableRow, WeaponsTableRow} from "./cards";
+import {ClassesTableRow, WeaponsTableRow} from "./../cards";
 import {
   FinalsTrackerResponse,
   GameMode,
   GameStats,
-  GameStatsResponse, TournamentStat,
-  WeaponGameStats
+  GameStatsResponse, TournamentStat
 } from "@common/sdk/finals-tracker/models";
 import {fetchGameStats} from "@common/sdk/finals-tracker";
 import {msToTimeString} from "@common/util";
 import {DonutChartData} from "@common/components";
 
-export class UserStatsStore {
+export class UserStatsV2Store {
   @observable.ref protected _stats?: FinalsTrackerResponse<GameStatsResponse> = undefined
   @observable.ref protected _gameMode: GameMode = GameMode.TOTAL
+  @observable.ref protected _activeTab: string = "overview"
 
-  static new = () => new UserStatsStore()
+  static new = () => new UserStatsV2Store()
 
   private constructor() {
     makeObservable(this)
@@ -28,6 +28,11 @@ export class UserStatsStore {
   @computed
   get isLoading(): boolean {
     return this._stats === undefined
+  }
+
+  @computed
+  get activeTab(): string {
+    return this._activeTab
   }
 
   @computed
@@ -78,9 +83,10 @@ export class UserStatsStore {
   }
 
   private getPercentage(value?: number) {
-    return `${value ? Math.round(value * 100) / 100 : 0}%`
+    return `${value ? Math.round(value * 100_00) / 100 : 0}%`
   }
 
-  @action setGameType = (gameMode: GameMode) => this._gameMode = gameMode
+  @action setGameMode = (gameMode: GameMode) => this._gameMode = gameMode
+  @action setActiveTab = (activeTab: string) => this._activeTab = activeTab
   @action private setStats = (stats: FinalsTrackerResponse<GameStatsResponse> | undefined) => this._stats = stats
 }

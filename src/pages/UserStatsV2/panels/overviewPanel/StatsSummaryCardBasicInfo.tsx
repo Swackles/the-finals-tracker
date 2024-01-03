@@ -28,10 +28,10 @@ export const StatsSummaryCardBasicInfo = ({ data, timePlayed }: StatsSummaryCard
       alignItems="flex-start"
       flexWrap="wrap"
     >
-      <StatCard title="k/d" value={Math.round(data.kills / data.deaths * 100) / 100} />
       <StatCard title="Kills" value={data.kills} />
       <StatCard title="Deaths" value={data.deaths} />
       <StatCard title="Revives" value={data.revivesDone} />
+      <StatCard title="Cashout" md={12} value={cashoutAmount} />
       <Grid xs={12}>
         <Card variant="soft" size="sm">
           <AspectRatio ratio={2}>
@@ -51,7 +51,7 @@ export const StatsSummaryCardBasicInfo = ({ data, timePlayed }: StatsSummaryCard
                     spacing={0.5}>
                   <Typography level="title-lg">Round</Typography>
                   <Divider />
-                  <Typography>{`${Math.round(data.roundWinRate * 100) / 100}%`}</Typography>
+                  <Typography>{`${Math.round(data.roundWinRate * 100_00) / 100}%`}</Typography>
                 </Stack>
               </Grid>
               <Grid xs={6}>
@@ -62,7 +62,7 @@ export const StatsSummaryCardBasicInfo = ({ data, timePlayed }: StatsSummaryCard
                   spacing={0.5}>
                   <Typography level="title-lg">Tournament</Typography>
                   <Divider />
-                  <Typography>{`${Math.round(data.tournamentWinRate * 100) / 100}%`}</Typography>
+                  <Typography>{`${Math.round(data.tournamentWinRate * 100_00) / 100}%`}</Typography>
                 </Stack>
               </Grid>
             </Stack>
@@ -70,7 +70,6 @@ export const StatsSummaryCardBasicInfo = ({ data, timePlayed }: StatsSummaryCard
         </Card>
       </Grid>
       <TimePlayedCard data={timePlayed} />
-      <StatCard title="Cashout" md={12} value={cashoutAmount} />
     </Stack>
   )
 }

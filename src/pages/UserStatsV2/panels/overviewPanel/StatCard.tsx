@@ -1,4 +1,4 @@
-import {AspectRatio, Card, Divider, Grid, Stack, Typography} from "@mui/joy";
+import {Card, Divider, Grid, Stack, Typography} from "@mui/joy";
 
 export interface StatCardProps {
   title: string
@@ -6,10 +6,9 @@ export interface StatCardProps {
   md?: number
 }
 
-export const StatCard = ({title, value, md = 6}: StatCardProps) =>
+export const StatCard = ({title, value, md = 4}: StatCardProps) =>
   <Grid xs={12} md={md}>
     <Card variant="soft" size="sm">
-      <AspectRatio ratio={md / 3}>
         <Stack
           direction="column"
           justifyContent="center"
@@ -19,6 +18,5 @@ export const StatCard = ({title, value, md = 6}: StatCardProps) =>
           <Divider />
           <Typography>{value}</Typography>
         </Stack>
-      </AspectRatio>
     </Card>
   </Grid>
