@@ -6,5 +6,5 @@ export interface MatchHistoryPanelProps {
 }
 
 export const MatchHistoryPanel = ({ tournaments }: MatchHistoryPanelProps) => {
-    return tournaments.map(tournament => <TournamentCard data={tournament} />)
+    return tournaments.map(tournament => <TournamentCard key={tournament.id} data={tournament} />)
 }
