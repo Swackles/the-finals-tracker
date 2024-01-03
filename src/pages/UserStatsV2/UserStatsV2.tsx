@@ -9,7 +9,6 @@ import Box from "@mui/joy/Box";
 import {WeaponsPanel} from "./panels/weaponsPanel/WeaponsPanel";
 import {MatchHistoryPanel} from "./panels/matchHistoryPanel/MatchHistoryPanel";
 import {OverviewPanel} from "./panels/overviewPanel/OverviewPanel";
-import {Stack} from "@mui/joy";
 
 export interface UserStatsProps {
   isMocked: boolean
