@@ -53,7 +53,7 @@ export enum RoundMap {
 
     LAS_VEGAS_BASE = "DA_MV_LasVegas_01_Base",
     LAS_VEGAS_LOCKDOWN ="DA_MV_LasVegas_01_Lockdown",
-    LAS_VEGAS_SANDSTORM = "DA_MV_LasVegas_01_SandStorm",
+    LAS_VEGAS_SANDSTORM = "DA_MV_LasVegas_01_Sandstorm",
 }
 
 export interface TournamentRound {
