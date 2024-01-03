@@ -1,14 +1,9 @@
 import {Card, CardOverflow, Stack, Table, Typography} from '@mui/joy';
 import {getWeaponNameFromId} from "@common/util";
-
-export interface WeaponsTableRow {
-  id: string
-  damage?: number,
-  kills?: number
-}
+import {GameLoadoutAsset} from "@common/sdk/finals-tracker";
 
 export interface WeaponsTableProps {
-  data: WeaponsTableRow[]
+  data: GameLoadoutAsset[]
 }
 
 export const WeaponsTableCard = ({ data }: WeaponsTableProps) => {
@@ -29,23 +24,27 @@ export const WeaponsTableCard = ({ data }: WeaponsTableProps) => {
           <thead>
           <tr>
             <th>Weapon</th>
+            <th>Class</th>
+            <th>Type</th>
             <th>Kills</th>
             <th>Damage</th>
           </tr>
           </thead>
           <tbody>
           {data.map(x => (
-            <tr key={x.id}>
+            <tr key={x.name}>
               <td>
                 <Stack
                   direction="row"
                   justifyContent="flex-start"
                   alignItems="center"
                   spacing={2}>
-                  <img alt={getWeaponNameFromId(x.id)} style={{ width: 60, height: 60}} src={`/images/weapons/${getWeaponNameFromId(x.id).replaceAll(" ", "-").replaceAll(".", "")}.png`}/>
-                  <Typography>{getWeaponNameFromId(x.id)}</Typography>
+                  <img alt={getWeaponNameFromId(x.name)} style={{ width: 60, height: 60}} src={`/images/weapons/${getWeaponNameFromId(x.name).replaceAll(" ", "-").replaceAll(".", "")}.png`}/>
+                  <Typography>{getWeaponNameFromId(x.name)}</Typography>
                 </Stack>
               </td>
+              <td>{x.archetype}</td>
+              <td>{x.type}</td>
               <td>{x.kills}</td>
               <td>{x.damage}</td>
             </tr>

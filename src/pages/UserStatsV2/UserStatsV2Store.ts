@@ -1,6 +1,6 @@
 import {action, computed, makeObservable, observable} from "mobx";
 import {
-  FinalsTrackerResponse,
+  FinalsTrackerResponse, GameLoadoutAsset,
   GameMode,
   GameStats,
   GameStatsResponse, TournamentStat
@@ -8,7 +8,6 @@ import {
 import {fetchGameStats} from "@common/sdk/finals-tracker";
 import {msToTimeString} from "@common/util";
 import {DonutChartData} from "@common/components";
-import {WeaponsTableRow} from "./panels/weaponsPanel/WeaponsTableCard";
 import {ClassesTableRow} from "./panels/overviewPanel/ClassesTableCard";
 
 export class UserStatsV2Store {
@@ -47,12 +46,8 @@ export class UserStatsV2Store {
   }
 
   @computed
-  get weaponTableRows(): WeaponsTableRow[] {
-    return this.gameStats.weapons.map(weapon => ({
-      id: weapon.name,
-      damage: weapon.damage,
-      kills: weapon.kills
-    }))
+  get weaponTableRows(): GameLoadoutAsset[] {
+    return this.gameStats.loadoutItems
   }
 
   @computed

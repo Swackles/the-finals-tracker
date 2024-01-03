@@ -3,12 +3,13 @@ import {useStore} from "@common/stores";
 import {observer} from "mobx-react";
 import {useEffect} from "react";
 import MockedGameStats from "@common/data/mockedGameStats.json"
-import { Sidebar } from "./components/sidebar";
-import {GameModeTabs} from "./components/GameModeTabs";
+import {Sidebar} from "./components/sidebar";
 import Box from "@mui/joy/Box";
 import {WeaponsPanel} from "./panels/weaponsPanel/WeaponsPanel";
 import {MatchHistoryPanel} from "./panels/matchHistoryPanel/MatchHistoryPanel";
 import {OverviewPanel} from "./panels/overviewPanel/OverviewPanel";
+import {Filter} from "@common/components";
+import {GameMode} from "@common/sdk/finals-tracker";
 
 export interface UserStatsProps {
   isMocked: boolean
@@ -39,12 +40,14 @@ export const UserStatsV2 = observer(({ isMocked }: UserStatsProps) => {
                 display: 'flex',
                 flexDirection: 'column',
                 minWidth: 0,
-                height: '100dvh',
                 gap: 1,
+                marginBottom: 5
             }}
         >
             <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', gap: 1 }}>
-                {store.activeTab !== "match-history" && <GameModeTabs gameMode={store.gameMode} onGameModeChange={store.setGameMode}/>}
+                {store.activeTab !== "match-history" && <Filter values={[GameMode.TOTAL, GameMode.CASUAL, GameMode.RANKED]}
+                                                                defaultValue={store.gameMode}
+                                                                onChange={x => store.setGameMode(x as GameMode)}/>}
                 {store.activeTab === "overview" && <OverviewPanel
                     data={store.statsSummary}
                     classesTableData={store.getClassesTableRows}

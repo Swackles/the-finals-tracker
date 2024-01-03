@@ -1,14 +1,10 @@
+import {GameLoadoutAsset} from "./GameLoadoutAsset";
+
 export interface ArchetypeGameStats {
     type: string
     roundWinRate: number
     tournamentWinRate: number
     timePlayed: number
-}
-
-export interface WeaponGameStats {
-    name: string
-    damage: number
-    kills: number
 }
 
 export enum GameMode {
@@ -21,7 +17,7 @@ export interface GameStats {
     gameMode: GameMode
 
     archetypes: ArchetypeGameStats[]
-    weapons: WeaponGameStats[]
+    loadoutItems: GameLoadoutAsset[]
 
     kills: number
     deaths: number
