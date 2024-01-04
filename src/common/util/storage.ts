@@ -3,7 +3,7 @@ enum Storage {
 }
 
 export const getAuthenticationToken = () =>
-  localStorage.getItem(Storage.AUTH)
+  localStorage.getItem(Storage.AUTH) || undefined
 
 export const saveAuthenticationToken = (token?: string) => {
   if (token === undefined) localStorage.removeItem(Storage.AUTH)

@@ -2,10 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import {getAuthenticationToken} from "@common/util";
 
 export const API: AxiosInstance = axios.create({
-    baseURL: "https://api.finals-tracker.com/api/",
-    headers: {
-        Authorization: `Bearer ${getAuthenticationToken()}`
-    }
+    baseURL: "https://api.finals-tracker.com/api/"
 });
 
 export enum FinalsTrackerUrls {
@@ -14,5 +11,5 @@ export enum FinalsTrackerUrls {
 
 API.interceptors.response.use(
     res => res,
-    err => err.response.data
+    err => err.response
 )

@@ -1,8 +1,6 @@
 import {UserStatsV2Store} from "./UserStatsV2Store";
 import {useStore} from "@common/stores";
 import {observer} from "mobx-react";
-import {useEffect} from "react";
-import MockedGameStats from "@common/data/mockedGameStats.json"
 import {Sidebar} from "./components/sidebar";
 import Box from "@mui/joy/Box";
 import {WeaponsPanel} from "./panels/weaponsPanel/WeaponsPanel";
@@ -10,19 +8,18 @@ import {MatchHistoryPanel} from "./panels/matchHistoryPanel/MatchHistoryPanel";
 import {OverviewPanel} from "./panels/overviewPanel/OverviewPanel";
 import {Filter} from "@common/components";
 import {GameMode} from "@common/sdk/finals-tracker";
+import {useAuthStore} from "@common/stores/AuthProvider";
+import {useEffect} from "react";
 
-export interface UserStatsProps {
-  isMocked: boolean
-}
-
-export const UserStatsV2 = observer(({ isMocked }: UserStatsProps) => {
+export const UserStatsV2 = observer(() => {
+  const { json, authMethod } = useAuthStore()
   const store = useStore(UserStatsV2Store.new)
 
   useEffect(() => {
-    store.fetchData(undefined, isMocked ? MockedGameStats : undefined)
-  }, [store, isMocked])
+    store.fetchData(json)
+  }, [])
 
-  if (store.isLoading) return <></>
+  if (store.isLoading || store.isErrored) return <></>
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100dvh' }}>

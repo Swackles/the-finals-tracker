@@ -21,13 +21,18 @@ export class UserStatsV2Store {
     makeObservable(this)
   }
 
-  async fetchData(token: string | undefined = undefined, json: any = undefined) {
-    this.setStats(await fetchGameStats(token, json))
+  async fetchData(json: any = undefined) {
+    this.setStats(await fetchGameStats(json))
   }
 
   @computed
   get isLoading(): boolean {
     return this._stats === undefined
+  }
+
+  @computed
+  get isErrored(): boolean {
+    return this._stats?.errors != undefined && this._stats.errors.length > 0
   }
 
   @computed
