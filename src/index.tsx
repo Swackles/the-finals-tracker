@@ -2,8 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {CssVarsProvider, extendTheme} from "@mui/joy";
+import {CssVarsProvider  as JoyCssVarsProvider, extendTheme} from "@mui/joy";
+import {
+  experimental_extendTheme as materialExtendTheme,
+  Experimental_CssVarsProvider as MaterialCssVarsProvider,
+  THEME_ID as MATERIAL_THEME_ID,
+} from '@mui/material/styles';
 
+const materialTheme = materialExtendTheme();
 
 const theme = extendTheme({
   colorSchemes: {
@@ -21,9 +27,11 @@ ReactDOM
   .createRoot(document.getElementById('root')!)
   .render(
     <React.StrictMode>
-      <CssVarsProvider theme={theme}>
-        <App />
-      </CssVarsProvider>
+      <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
+        <JoyCssVarsProvider theme={theme}>
+          <App />
+        </JoyCssVarsProvider>
+      </MaterialCssVarsProvider>
     </React.StrictMode>
   );
 

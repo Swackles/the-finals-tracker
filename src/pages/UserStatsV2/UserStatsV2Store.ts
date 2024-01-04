@@ -9,6 +9,7 @@ import {fetchGameStats} from "@common/sdk/finals-tracker";
 import {msToTimeString} from "@common/util";
 import {DonutChartData} from "@common/components";
 import {ClassesTableRow} from "./panels/overviewPanel/ClassesTableCard";
+import {MatchesChartData} from "./panels/overviewPanel/MatchesChartCard";
 
 export class UserStatsV2Store {
   @observable.ref protected _stats?: FinalsTrackerResponse<GameStatsResponse> = undefined
@@ -34,6 +35,19 @@ export class UserStatsV2Store {
   get isErrored(): boolean {
     return this._stats?.errors != undefined && this._stats.errors.length > 0
   }
+
+  @computed
+  get matchesChart(): MatchesChartData[] {
+    return this.tournaments.map(tournament =>
+      tournament.rounds.map(round => ({
+        kills: round.kills,
+        deaths: round.deaths,
+        respawns: round.respawns,
+        revives: round.revives
+      }))
+    ).flat().filter((_, i) => i < 10)
+  }
+
 
   @computed
   get activeTab(): string {

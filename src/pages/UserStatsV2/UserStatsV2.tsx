@@ -45,7 +45,7 @@ export const UserStatsV2 = observer(() => {
                 {store.activeTab !== "match-history" && <Filter values={[GameMode.TOTAL, GameMode.CASUAL, GameMode.RANKED]}
                                                                 defaultValue={store.gameMode}
                                                                 onChange={x => store.setGameMode(x as GameMode)}/>}
-                {store.activeTab === "overview" && <OverviewPanel
+                {store.activeTab === "overview" && <OverviewPanel matchesData={store.matchesChart}
                     data={store.statsSummary}
                     classesTableData={store.getClassesTableRows}
                     timePlayed={store.getTimePlayed}/> }
