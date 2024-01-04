@@ -52,12 +52,23 @@ export class UserStatsV2Store {
 
   @computed
   get getClassesTableRows(): ClassesTableRow[] {
-    return this.gameStats.archetypes.map(archetype => ({
-      class: archetype.type,
-      timePlayed: msToTimeString(archetype.timePlayed),
-      tournamentWinRate: this.getPercentage(archetype.tournamentWinRate),
-      roundWinRate: this.getPercentage(archetype.roundWinRate)
-    }))
+    return this.gameStats.archetypes.map(archetype => {
+      const { kills, damage } = this.weaponTableRows
+        .filter(row => row.archetype === (archetype.type))
+        .reduce((a, b) => ({
+          kills: a.kills + b.kills,
+          damage: a.damage + (b.damage * 100_000)
+        }), { kills: 0, damage: 0 })
+
+      return ({
+        class: archetype.type,
+        kills,
+        damage: Math.round(damage / 100_000),
+        timePlayed: msToTimeString(archetype.timePlayed),
+        tournamentWinRate: this.getPercentage(archetype.tournamentWinRate),
+        roundWinRate: this.getPercentage(archetype.roundWinRate)
+      })
+    })
   }
 
   @computed
