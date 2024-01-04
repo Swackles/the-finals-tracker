@@ -1,7 +1,7 @@
 import './App.css';
 import {UserStatsV2} from "./pages/UserStatsV2";
 import {Box} from "@mui/material";
-import {Button, Input, Stack} from "@mui/joy";
+import {Button, Input, Stack, Typography} from "@mui/joy";
 import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {getAuthenticationToken, saveAuthenticationToken} from "@common/util";
 import {API} from "@common/sdk/finals-tracker/api";
@@ -35,12 +35,13 @@ function App() {
 
   return (
     <>
-        {!(auth || isMocked) && <Box style={{backgroundColor: "#d31f3c", height: "20em"}}>
+        {!(auth || isMocked) && <Box style={{backgroundColor: "#d31f3c", height: "100vh"}}>
             <Stack
                 direction="column"
-                justifyContent="center"
+                justifyContent="space-between"
                 alignItems="center"
                 spacing={1} sx={{height: "100%"}}>
+                <Typography sx={{ display: "none" }} level="h1">The Finals Stats Tracker</Typography>
                 <Stack
                     direction="column"
                     justifyContent="center"
@@ -50,6 +51,9 @@ function App() {
                     <Button
                         onClick={() => setIsMocked(x => !x)}>{isMocked ? "Use live data" : "Use mocked data"}</Button>
                 </Stack>
+                <a style={{ marginBottom: 20 }} href="https://github.com/Swackles/the-finals-tracker" target="_blank">
+                  <img style={{ width: 50, height: 50}} src={"/github-mark-white.svg"}/>
+                </a>
             </Stack>
         </Box>}
       {(auth || isMocked) && <UserStatsV2 isMocked={isMocked}/>}
