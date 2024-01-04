@@ -1,5 +1,5 @@
-import {Button, FormControl, FormHelperText, Input, Stack, Typography} from "@mui/joy";
-import {InfoOutlined} from "@mui/icons-material";
+import {Button, FormControl, FormHelperText, IconButton, Input, Stack, Typography} from "@mui/joy";
+import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import {Box} from "@mui/material";
 import {ChangeEvent, useCallback, useState} from "react";
 import {getAuthenticationToken, saveAuthenticationToken} from "@common/util";
@@ -50,22 +50,29 @@ export const HomePage = () => {
           justifyContent="center"
           alignItems="center"
           spacing={1} sx={{height: "100%"}}>
-          <Input placeholder="API token" size="lg" onChange={onJwtInput}/>
+          <Input placeholder="JWT token" size="lg" onChange={onJwtInput}/>
           <FormControl error={!!fileError} sx={{ width: "100%" }} >
             <Button color="neutral" component="label">
-              Upload File
+              Upload JSON
               <input type="file"
                      accept="application/json"
                      hidden
                      onChange={onFileInput} />
             </Button>
-            {fileError && <FormHelperText>
-                <InfoOutlined/> {fileError}
-            </FormHelperText>}
+            {fileError && <FormHelperText><InfoOutlined/> {fileError}</FormHelperText>}
           </FormControl>
           <Button disabled={file === undefined && jwt === undefined}
                   color="neutral"
                   onClick={() => login(jwt, file)} >View Stats</Button>
+          <Button component="a"
+                  sx={{ "&:hover": {backgroundColor: "transparent"}, color: "var(--variant-solidDisabledColor)" }}
+                  target="_blank"
+                  href="https://github.com/Swackles/the-finals-tracker?tab=readme-ov-file#how-to-get-json-or-jwt-token"
+                  color="neutral"
+                  variant="plain" >
+            How do get JWT token or JSON?
+          </Button>
+
         </Stack>
         <a style={{ marginBottom: 20 }} href="https://github.com/Swackles/the-finals-tracker" target="_blank">
           <img style={{ width: 50, height: 50}} src={"/github-mark-white.svg"}/>
