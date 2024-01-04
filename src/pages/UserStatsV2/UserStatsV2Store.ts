@@ -1,5 +1,6 @@
 import {action, computed, makeObservable, observable} from "mobx";
 import {
+  ArchetypeGameStats,
   FinalsTrackerResponse, GameLoadoutAsset,
   GameMode,
   GameStats,
@@ -71,7 +72,7 @@ export class UserStatsV2Store {
 
   @computed
   get getClassesTableRows(): ClassesTableRow[] {
-    return this.gameStats.archetypes.map(archetype => {
+    return this.archetypes.map(archetype => {
       const { kills, damage } = this.weaponTableRows
         .filter(row => row.archetype === (archetype.type))
         .reduce((a, b) => ({
@@ -91,16 +92,37 @@ export class UserStatsV2Store {
   }
 
   @computed
-  get getTimePlayed(): DonutChartData[] {
-    return this.gameStats.archetypes.map(archetype => ({
+  get getTimePlayedPerArchetype(): DonutChartData[] {
+    return this.archetypes.map(archetype => ({
       legend: archetype.type,
       value: archetype.timePlayed || 0
     }))
   }
 
   @computed
+  get getDamagePerArchetype(): DonutChartData[] {
+    return this.getClassesTableRows.map(archetype => ({
+      legend: archetype.class,
+      value: archetype.damage || 0
+    }))
+  }
+
+  @computed
+  get getKillsPerArchetype(): DonutChartData[] {
+    return this.getClassesTableRows.map(archetype => ({
+      legend: archetype.class,
+      value: archetype.kills || 0
+    }))
+  }
+
+  @computed
   get tournaments(): TournamentStat[] {
     return this._stats!.data?.tournaments || []
+  }
+
+  @computed
+  private get archetypes(): ArchetypeGameStats[] {
+    return this.gameStats.archetypes.filter(archtype => archtype.type != "???")
   }
 
   @computed

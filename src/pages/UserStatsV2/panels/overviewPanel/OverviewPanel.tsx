@@ -8,11 +8,19 @@ import {MatchesChartCard, MatchesChartData} from "./MatchesChartCard";
 export interface OverviewPanelProps {
   data: GameStats
   classesTableData: ClassesTableRow[]
-  timePlayed: DonutChartData[]
+  timePlayedPerArchetype: DonutChartData[]
+  damagePerArchetype: DonutChartData[]
+  killsPerArchetype: DonutChartData[]
   matchesData: MatchesChartData[]
 }
 
-export const OverviewPanel = ({data, classesTableData, timePlayed, matchesData}: OverviewPanelProps) => {
+export const OverviewPanel = (props: OverviewPanelProps) => {
+  const {
+    data,
+    classesTableData,
+    timePlayedPerArchetype, damagePerArchetype, killsPerArchetype,
+    matchesData
+  } = props
   return (
     <Grid
       container
@@ -28,7 +36,10 @@ export const OverviewPanel = ({data, classesTableData, timePlayed, matchesData}:
         <MatchesChartCard data={matchesData}/>
       </Grid>
       <Grid xs={5}>
-        <StatsSummaryCardBasicInfo data={data} timePlayed={timePlayed} />
+        <StatsSummaryCardBasicInfo data={data}
+                                   timePlayedPerArchetype={timePlayedPerArchetype}
+                                   damagePerArchetype={damagePerArchetype}
+                                   killsPerArchetype={killsPerArchetype} />
       </Grid>
     </Grid>
   )

@@ -12,7 +12,7 @@ import {useAuthStore} from "@common/stores/AuthProvider";
 import {useEffect} from "react";
 
 export const UserStatsV2 = observer(() => {
-  const { json, authMethod } = useAuthStore()
+  const { json } = useAuthStore()
   const store = useStore(UserStatsV2Store.new)
 
   useEffect(() => {
@@ -48,7 +48,9 @@ export const UserStatsV2 = observer(() => {
                 {store.activeTab === "overview" && <OverviewPanel matchesData={store.matchesChart}
                     data={store.statsSummary}
                     classesTableData={store.getClassesTableRows}
-                    timePlayed={store.getTimePlayed}/> }
+                    timePlayedPerArchetype={store.getTimePlayedPerArchetype}
+                    damagePerArchetype={store.getDamagePerArchetype}
+                    killsPerArchetype={store.getKillsPerArchetype} /> }
                 {store.activeTab === "weapons" && <WeaponsPanel weaponTableData={store.weaponTableRows} />}
                 {store.activeTab === "match-history" && <MatchHistoryPanel tournaments={store.tournaments} />}
             </Box>

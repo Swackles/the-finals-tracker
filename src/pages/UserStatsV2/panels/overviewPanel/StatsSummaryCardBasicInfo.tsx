@@ -2,15 +2,17 @@ import {AspectRatio, Card, Divider, Grid, Stack, Typography} from "@mui/joy";
 import {GameStats} from "@common/sdk/finals-tracker";
 import {StatCard} from "./StatCard";
 import {useMemo} from "react";
-import {TimePlayedCard} from "./TimePlayedCard";
-import {DonutChartData} from "@common/components";
+import {DonutChart, DonutChartData} from "@common/components";
+import {msToTimeString} from "@common/util";
 
 export interface StatsSummaryCardBasicInfoProps {
   data: GameStats
-  timePlayed: DonutChartData[]
+  timePlayedPerArchetype: DonutChartData[]
+  damagePerArchetype: DonutChartData[]
+  killsPerArchetype: DonutChartData[]
 }
 
-export const StatsSummaryCardBasicInfo = ({ data, timePlayed }: StatsSummaryCardBasicInfoProps) => {
+export const StatsSummaryCardBasicInfo = ({ data, timePlayedPerArchetype, damagePerArchetype, killsPerArchetype }: StatsSummaryCardBasicInfoProps) => {
   const cashoutAmount = useMemo(() => {
     const amount = data.totalCashOut.toString()
     .split("").reverse().join("")
@@ -69,7 +71,22 @@ export const StatsSummaryCardBasicInfo = ({ data, timePlayed }: StatsSummaryCard
           </AspectRatio>
         </Card>
       </Grid>
-      <TimePlayedCard data={timePlayed} />
+      <Grid xs={12} md={4}>
+        <DonutChart
+          title="Time played"
+          labelGenerator={msToTimeString}
+          data={timePlayedPerArchetype}/>
+      </Grid>
+      <Grid xs={12} md={4}>
+        <DonutChart
+          title="Damage"
+          data={damagePerArchetype}/>
+      </Grid>
+      <Grid xs={12} md={4}>
+        <DonutChart
+          title="Kills"
+          data={killsPerArchetype}/>
+      </Grid>
     </Stack>
   )
 }
