@@ -2,17 +2,9 @@
 
 > This project is not affiliated or approved by Embark. Any use of this software is at your own risk. 
 
-This project uses embark's `https://api-gateway.europe.es-dis.net` API endpoints, that gives player statistics. Currently, these endpoints are private and require authentication tokens to view. When request is done using a token, then the server returns player statistics for that user.
+## How to get JSON
 
-Due to these endpoints being also protected by CORS, means that data cannot be fetched normally trough the browser. So there's a proxy server `api.finals-tracker.com` that all requests go trough.
-
-## How to get JSON or JWT token
-
-When you first enter the site, you have two possible inputs. For both of these inputs you can either fetch the data manually or use [The Finals Extractor](https://github.com/Swackles/the-finals-tracker-extractor) to get the data automatically. That project outputs both the JWT and JSON file so you can choose which one you enter.
-
-> The JWT token has a 24h expiration date attached to it
-
-> **NB!** It's important to remember that the JWT token is your authentication token with the embark servers. Although I promise that I **DO NOT SAVE** that token or any data coming from that token in the server, it's understandable if you don't trust me. That's why I've also provided the JSON as a safer way to visualize your data.
+When you first enter the site, you have two possible inputs. For both of these inputs you can either fetch the data manually or use [The Finals Extractor](https://github.com/Swackles/the-finals-tracker-extractor) to get the data automatically. That project outputs JSON file which you can import here.
 
 ## Development
 

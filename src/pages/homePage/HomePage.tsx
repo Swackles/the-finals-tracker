@@ -1,8 +1,7 @@
-import {Button, FormControl, FormHelperText, IconButton, Input, Stack, Typography} from "@mui/joy";
+import {Button, FormControl, FormHelperText, Stack, Typography} from "@mui/joy";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import {Box} from "@mui/material";
 import {ChangeEvent, useCallback, useState} from "react";
-import {getAuthenticationToken, saveAuthenticationToken} from "@common/util";
 import {useAuthStore} from "@common/stores/AuthProvider";
 import {JsonParser} from "./helpers";
 
@@ -10,7 +9,6 @@ export const HomePage = () => {
   const { login } = useAuthStore()
 
   const [file, setFile] = useState<any>()
-  const [jwt, setJwt] = useState(getAuthenticationToken())
 
   const [fileError, setFileError] = useState<string>()
 
@@ -32,11 +30,6 @@ export const HomePage = () => {
     }
   }, [setFile, setFileError])
 
-  const onJwtInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    saveAuthenticationToken(e.target.value)
-    setJwt(e.target.value)
-  }, [])
-
   return (
     <Box style={{backgroundColor: "#d31f3c", height: "100vh"}}>
       <Stack
@@ -50,7 +43,6 @@ export const HomePage = () => {
           justifyContent="center"
           alignItems="center"
           spacing={1} sx={{height: "100%"}}>
-          <Input placeholder="JWT token" size="lg" onChange={onJwtInput}/>
           <FormControl error={!!fileError} sx={{ width: "100%" }} >
             <Button color="neutral" component="label">
               Upload JSON
@@ -61,16 +53,16 @@ export const HomePage = () => {
             </Button>
             {fileError && <FormHelperText><InfoOutlined/> {fileError}</FormHelperText>}
           </FormControl>
-          <Button disabled={file === undefined && jwt === undefined}
+          <Button disabled={file === undefined}
                   color="neutral"
-                  onClick={() => login(jwt, file)} >View Stats</Button>
+                  onClick={() => login(file)} >View Stats</Button>
           <Button component="a"
-                  sx={{ "&:hover": {backgroundColor: "transparent"}, color: "var(--variant-solidDisabledColor)" }}
+                  sx={{ "&:hover": {backgroundColor: "transparent"}, color: "white" }}
                   target="_blank"
-                  href="https://github.com/Swackles/the-finals-tracker?tab=readme-ov-file#how-to-get-json-or-jwt-token"
+                  href="https://github.com/Swackles/the-finals-tracker?tab=readme-ov-file#how-to-get-json"
                   color="neutral"
                   variant="plain" >
-            How do get JWT token or JSON?
+            How do get JSON?
           </Button>
 
         </Stack>
