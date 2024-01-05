@@ -5,7 +5,8 @@ export const JsonParser = (input: ExporterJson) => {
     case 1:
       return {
         roundStats: input["v1-discovery-roundstats"],
-        roundStatsSummary: input["v1-discovery-roundstatsummary"]
+        roundStatsSummary: input["v1-discovery-roundstatsummary"],
+        profile: input["v1-shared-profile"]
       }
   default:
     throw new Error(`Unknown file version "${input.version}"`)

@@ -5,6 +5,7 @@ import {ClassesTableCard, ClassesTableRow} from "./ClassesTableCard";
 import {StatsSummaryCardBasicInfo} from "./StatsSummaryCardBasicInfo";
 import {MatchesChartCard, MatchesChartData} from "./MatchesChartCard";
 import {WinRateData} from "./WinRateCard";
+import {RanksChartCard} from "./ranksChartCard/RanksChartCard";
 
 export interface OverviewPanelProps {
   data: GameStats
@@ -34,8 +35,13 @@ export const OverviewPanel = (props: OverviewPanelProps) => {
       <Grid xs={7}>
         <ClassesTableCard data={classesTableData} />
       </Grid>
-      <Grid xs={12} md={6}>
-        <MatchesChartCard data={matchesData}/>
+      <Grid container spacing={2} xs={12} md={6}>
+        <Grid xs={12}>
+          <RanksChartCard />
+        </Grid>
+        <Grid xs={12}>
+          <MatchesChartCard data={matchesData} />
+        </Grid>
       </Grid>
       <Grid xs={5}>
         <StatsSummaryCardBasicInfo data={data}

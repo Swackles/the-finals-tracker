@@ -1,3 +1,5 @@
 export * from "./FinalsTrackerResponse"
 export * from "./GameLoadoutAsset"
 export * from "./GameStatsResponse"
+export * from "./LeaderboardUser"
+export * from "./UserLeaderboardQueryParams"

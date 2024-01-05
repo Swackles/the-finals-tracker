@@ -6,6 +6,7 @@ export const API: AxiosInstance = axios.create({
 
 export enum FinalsTrackerUrls {
     GAME_STATS = "/v1/gamestats",
+    USER_LEADERBOARD = "/v1/users/leaderboard"
 }
 
 API.interceptors.response.use(
