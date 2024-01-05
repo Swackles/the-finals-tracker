@@ -76,8 +76,6 @@ export const DonutChart = ({ title, data, labelGenerator = (x) => x.toString() }
           .select("p")
           .html(`${i.data.legend} ${labelGenerator(i.data.value)}`)
 
-        console.log(d)
-
         tooltip
           .style("left", d.layerX + 15 + "px")
           .style("top", d.layerY + 15 + "px")
@@ -106,8 +104,7 @@ export const DonutChart = ({ title, data, labelGenerator = (x) => x.toString() }
           spacing={0.5}>
           <Typography level="title-lg">{title}</Typography>
           <Divider />
-          <div id={id} ref={x => div.current = x}>
-          </div>
+          <div id={id} ref={x => div.current = x} />
           <Card id={`tooltip-${id}`}
                 size="sm"
                 sx={{
