@@ -5,7 +5,6 @@ import {ClassesTableCard, ClassesTableRow} from "./ClassesTableCard";
 import {StatsSummaryCardBasicInfo} from "./StatsSummaryCardBasicInfo";
 import {MatchesChartCard, MatchesChartData} from "./MatchesChartCard";
 import {WinRateData} from "./WinRateCard";
-import {RanksChartCard} from "./ranksChartCard/RanksChartCard";
 
 export interface OverviewPanelProps {
   data: GameStats
