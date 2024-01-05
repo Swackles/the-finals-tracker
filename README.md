@@ -1,5 +1,7 @@
 # The Finals Stats Tracker
 
+> This project is not affiliated or approved by Embark. Any use of this software is at your own risk. 
+
 This project uses embark's `https://api-gateway.europe.es-dis.net` API endpoints, that gives player statistics. Currently, these endpoints are private and require authentication tokens to view. When request is done using a token, then the server returns player statistics for that user.
 
 Due to these endpoints being also protected by CORS, means that data cannot be fetched normally trough the browser. So there's a proxy server `api.finals-tracker.com` that all requests go trough.
