@@ -4,6 +4,8 @@ import {Grid} from "@mui/joy";
 import {ClassesTableCard, ClassesTableRow} from "./ClassesTableCard";
 import {StatsSummaryCardBasicInfo} from "./StatsSummaryCardBasicInfo";
 import {MatchesChartCard, MatchesChartData} from "./MatchesChartCard";
+import {WinRateData} from "./WinRateCard";
+import {RanksChartCard} from "./ranksChartCard/RanksChartCard";
 
 export interface OverviewPanelProps {
   data: GameStats
@@ -12,13 +14,14 @@ export interface OverviewPanelProps {
   damagePerArchetype: DonutChartData[]
   killsPerArchetype: DonutChartData[]
   matchesData: MatchesChartData[]
+  winRateDataChart: WinRateData[]
 }
 
 export const OverviewPanel = (props: OverviewPanelProps) => {
   const {
     data,
     classesTableData,
-    timePlayedPerArchetype, damagePerArchetype, killsPerArchetype,
+    timePlayedPerArchetype, damagePerArchetype, killsPerArchetype, winRateDataChart,
     matchesData
   } = props
   return (
@@ -39,7 +42,8 @@ export const OverviewPanel = (props: OverviewPanelProps) => {
         <StatsSummaryCardBasicInfo data={data}
                                    timePlayedPerArchetype={timePlayedPerArchetype}
                                    damagePerArchetype={damagePerArchetype}
-                                   killsPerArchetype={killsPerArchetype} />
+                                   killsPerArchetype={killsPerArchetype}
+                                   winRateDataChart={winRateDataChart}/>
       </Grid>
     </Grid>
   )

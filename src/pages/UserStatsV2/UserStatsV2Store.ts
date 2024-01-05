@@ -11,6 +11,7 @@ import {msToTimeString} from "@common/util";
 import {DonutChartData} from "@common/components";
 import {ClassesTableRow} from "./panels/overviewPanel/ClassesTableCard";
 import {MatchesChartData} from "./panels/overviewPanel/MatchesChartCard";
+import {WinRateData} from "./panels/overviewPanel/WinRateCard";
 
 export class UserStatsV2Store {
   @observable.ref protected _stats?: FinalsTrackerResponse<GameStatsResponse> = undefined
@@ -89,6 +90,32 @@ export class UserStatsV2Store {
         roundWinRate: this.getPercentage(archetype.roundWinRate)
       })
     })
+  }
+
+  @computed
+  get getWinRates(): WinRateData[] {
+    const light = this.archetypes
+      .find((archtype) => archtype.type === "Light")
+    const medium =this.archetypes
+      .find((archtype) => archtype.type === "Medium")
+    const heavy =this.archetypes
+      .find((archtype) => archtype.type === "Heavy")
+
+    return [{
+        type: "Round",
+        total: this.gameStats.roundWinRate,
+        light: light?.roundWinRate || 0,
+        medium: medium?.roundWinRate || 0,
+        heavy: heavy?.roundWinRate || 0
+      },
+      {
+        type: "Tournament",
+        total: this.gameStats.tournamentWinRate,
+        light: light?.tournamentWinRate || 0,
+        medium: medium?.tournamentWinRate || 0,
+        heavy: heavy?.tournamentWinRate || 0
+      }
+    ]
   }
 
   @computed

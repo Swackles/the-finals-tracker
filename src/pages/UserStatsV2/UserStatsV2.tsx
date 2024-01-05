@@ -46,11 +46,12 @@ export const UserStatsV2 = observer(() => {
                                                                 defaultValue={store.gameMode}
                                                                 onChange={x => store.setGameMode(x as GameMode)}/>}
                 {store.activeTab === "overview" && <OverviewPanel matchesData={store.matchesChart}
-                    data={store.statsSummary}
-                    classesTableData={store.getClassesTableRows}
-                    timePlayedPerArchetype={store.getTimePlayedPerArchetype}
-                    damagePerArchetype={store.getDamagePerArchetype}
-                    killsPerArchetype={store.getKillsPerArchetype} /> }
+                                                                  data={store.statsSummary}
+                                                                  classesTableData={store.getClassesTableRows}
+                                                                  timePlayedPerArchetype={store.getTimePlayedPerArchetype}
+                                                                  damagePerArchetype={store.getDamagePerArchetype}
+                                                                  killsPerArchetype={store.getKillsPerArchetype}
+                                                                  winRateDataChart={store.getWinRates} /> }
                 {store.activeTab === "weapons" && <WeaponsPanel weaponTableData={store.weaponTableRows} />}
                 {store.activeTab === "match-history" && <MatchHistoryPanel tournaments={store.tournaments} />}
             </Box>
