@@ -1,29 +1,9 @@
-import {GameStats} from "@common/sdk/finals-tracker";
-import {DonutChartData} from "@common/components";
 import {Grid} from "@mui/joy";
-import {ClassesTableCard, ClassesTableRow} from "./ClassesTableCard";
 import {StatsSummaryCardBasicInfo} from "./StatsSummaryCardBasicInfo";
-import {MatchesChartCard, MatchesChartData} from "./MatchesChartCard";
-import {WinRateData} from "./WinRateCard";
+import {MatchesChartCard} from "./MatchesChartCard";
 import {RanksChartCard} from "./ranksChartCard/RanksChartCard";
 
-export interface OverviewPanelProps {
-  data: GameStats
-  classesTableData: ClassesTableRow[]
-  timePlayedPerArchetype: DonutChartData[]
-  damagePerArchetype: DonutChartData[]
-  killsPerArchetype: DonutChartData[]
-  matchesData: MatchesChartData[]
-  winRateDataChart: WinRateData[]
-}
-
-export const OverviewPanel = (props: OverviewPanelProps) => {
-  const {
-    data,
-    classesTableData,
-    timePlayedPerArchetype, damagePerArchetype, killsPerArchetype, winRateDataChart,
-    matchesData
-  } = props
+export const OverviewPanel = () => {
   return (
     <Grid
       container
@@ -32,23 +12,16 @@ export const OverviewPanel = (props: OverviewPanelProps) => {
       alignItems="flex-start"
       flexWrap="wrap"
       spacing={2} >
-      <Grid xs={7}>
-        <ClassesTableCard data={classesTableData} />
-      </Grid>
       <Grid container spacing={2} xs={12} md={6}>
         <Grid xs={12}>
           <RanksChartCard />
         </Grid>
         <Grid xs={12}>
-          <MatchesChartCard data={matchesData} />
+          <MatchesChartCard />
         </Grid>
       </Grid>
       <Grid xs={5}>
-        <StatsSummaryCardBasicInfo data={data}
-                                   timePlayedPerArchetype={timePlayedPerArchetype}
-                                   damagePerArchetype={damagePerArchetype}
-                                   killsPerArchetype={killsPerArchetype}
-                                   winRateDataChart={winRateDataChart}/>
+        <StatsSummaryCardBasicInfo />
       </Grid>
     </Grid>
   )

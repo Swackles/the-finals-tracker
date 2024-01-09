@@ -7,26 +7,17 @@ import {useMemo, useState} from "react";
 import {MakeOptional} from "@mui/x-charts/models/helpers";
 import {AxisConfig} from "@mui/x-charts/models/axis";
 import {useTheme} from "@mui/joy";
+import {useGameStatsStore} from "@common/stores/gameStatsStore";
 
-export interface MatchesChartData {
-  kills: number
-  deaths: number
-  respawns: number
-  revives: number
-}
-
-export interface MatchesChartProps {
-  data: MatchesChartData[]
-}
-
-export const MatchesChartCard = ({ data }: MatchesChartProps) => {
+export const MatchesChartCard = () => {
+  const { matches } = useGameStatsStore()
   const {palette: { primary }} = useTheme()
   const [checkboxes, setCheckboxes] = useState({
     kills: true, deaths: true, respawns: false, revives: false
   })
   const maxValue = useMemo(() =>
-    Math.max(...data.map(x => [x.kills, x.deaths, x.revives, x.respawns]).flat())
-  , [data])
+    Math.max(...matches.map(x => [x.kills, x.deaths, x.revives, x.respawns]).flat())
+  , [matches])
 
   const series = useMemo(() => {
     const kills = {
@@ -55,7 +46,7 @@ export const MatchesChartCard = ({ data }: MatchesChartProps) => {
       label: 'Revives'
     }
 
-    for (const point of data) {
+    for (const point of matches) {
       kills.data.push(point.kills)
       deaths.data.push(point.deaths)
       respawns.data.push(point.respawns)
@@ -63,7 +54,7 @@ export const MatchesChartCard = ({ data }: MatchesChartProps) => {
     }
 
     return [kills, deaths, respawns, revives].filter(({label}) => (checkboxes as any)[label.toLowerCase()])
-  }, [data, checkboxes])
+  }, [matches, checkboxes])
 
   const yAxis: MakeOptional<AxisConfig, 'id'>[] = [{
     disableLine: true,

@@ -3,13 +3,14 @@ import Card from "@mui/joy/Card";
 import Stack from "@mui/joy/Stack";
 import {CircularProgress, Typography, useTheme} from "@mui/joy";
 import {useEffect} from "react";
-import {useAuthStore, useStore} from "@common/stores";
+import {useStore} from "@common/stores";
 import {RanksChartCardStore} from "./RanksChartCardStore";
 import {observer} from "mobx-react";
+import {useGameStatsStore} from "@common/stores/gameStatsStore";
 
 export const RanksChartCard = observer(() => {
   const {palette: { primary }} = useTheme()
-  const { profile } = useAuthStore()
+  const { profile } = useGameStatsStore()
   const store = useStore(RanksChartCardStore.new)
 
   useEffect(() => {

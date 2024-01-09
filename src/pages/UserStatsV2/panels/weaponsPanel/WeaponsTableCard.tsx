@@ -1,9 +1,9 @@
 import {Card, CardOverflow, Stack, Table, Typography} from '@mui/joy';
 import {getWeaponNameFromId} from "@common/util";
-import {GameLoadoutAsset} from "@common/sdk/finals-tracker";
+import {WeaponStat} from "@common/stores/gameStatsStore";
 
 export interface WeaponsTableProps {
-  data: GameLoadoutAsset[]
+  data: WeaponStat[]
 }
 
 export const WeaponsTableCard = ({ data }: WeaponsTableProps) => {

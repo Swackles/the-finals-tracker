@@ -2,13 +2,10 @@ import {Button, FormControl, FormHelperText, Stack, Typography} from "@mui/joy";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import {Box} from "@mui/material";
 import {ChangeEvent, useCallback, useState} from "react";
-import {useAuthStore} from "@common/stores/AuthProvider";
-import {JsonParser} from "./helpers";
+import {useGameStatsStore} from "@common/stores/gameStatsStore";
 
 export const HomePage = () => {
-  const { login } = useAuthStore()
-
-  const [file, setFile] = useState<any>()
+  const { setJson } = useGameStatsStore()
 
   const [fileError, setFileError] = useState<string>()
 
@@ -19,7 +16,7 @@ export const HomePage = () => {
     reader.readAsText(e.target.files![0], "UTF-8");
     reader.onload = event => {
       try {
-        setFile(JsonParser(JSON.parse(event.target!.result as string)))
+        setJson(JSON.parse(event.target!.result as string))
       } catch (e) {
         setFileError((e as Error).message)
       }
@@ -28,7 +25,7 @@ export const HomePage = () => {
       console.error(event)
       setFileError("Error occured when parsing the file")
     }
-  }, [setFile, setFileError])
+  }, [setJson, setFileError])
 
   return (
     <Box style={{backgroundColor: "#d31f3c", height: "100vh"}}>
@@ -53,9 +50,6 @@ export const HomePage = () => {
             </Button>
             {fileError && <FormHelperText><InfoOutlined/> {fileError}</FormHelperText>}
           </FormControl>
-          <Button disabled={file === undefined}
-                  color="neutral"
-                  onClick={() => login(file)} >View Stats</Button>
           <Button component="a"
                   sx={{ "&:hover": {backgroundColor: "transparent"}, color: "white" }}
                   target="_blank"

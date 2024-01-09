@@ -1,8 +1,8 @@
 import {AspectRatio, Card, CardContent, CardOverflow, Divider, Skeleton, Stack, Typography} from "@mui/joy";
-import {TournamentRound} from "@common/sdk/finals-tracker";
 import React from "react";
 import {RoundCardText} from "./RoundCardText"
 import {getMapVariant} from "@common/util";
+import {TournamentRound} from "@common/stores/gameStatsStore";
 
 export interface RoundCardProps {
   data?: TournamentRound

@@ -1,19 +1,9 @@
 import {Card, Divider, Stack, Typography, useTheme} from "@mui/joy";
 import {BarChart} from "@mui/x-charts";
+import {useGameStatsStore} from "@common/stores/gameStatsStore";
 
-export interface WinRateData {
-  type: "Round" | "Tournament",
-  total: number,
-  light: number,
-  medium: number,
-  heavy: number
-}
-
-export interface WinRateCardProps {
-  chartData: WinRateData[]
-}
-
-export const WinRateCard = ({ chartData }: WinRateCardProps) => {
+export const WinRateCard = () => {
+  const { winRates } = useGameStatsStore()
   const {palette: { primary }} = useTheme()
 
   const valueFormatter = (rate: number) => `${Math.round(rate * 100)} %`
@@ -26,7 +16,7 @@ export const WinRateCard = ({ chartData }: WinRateCardProps) => {
              flexWrap="wrap">
         <Typography sx={{width: "100%", textAlign: "center"}} level="title-lg">Winrate</Typography>
         <Divider />
-        <BarChart dataset={chartData as any}
+        <BarChart dataset={winRates as any}
                   height={200}
                   xAxis={[{
                     scaleType: 'band',

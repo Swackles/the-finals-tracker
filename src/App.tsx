@@ -1,11 +1,11 @@
 import './App.css';
 import {UserStatsV2} from "./pages/UserStatsV2";
 import {HomePage} from "./pages/homePage/HomePage";
-import {AuthProvider} from "@common/stores/AuthProvider";
+import {GameStatsProvider} from "@common/stores/gameStatsStore";
 
 function App() {
-  return <AuthProvider authenticatedView={UserStatsV2}
-                       unauthenticatedView={HomePage} />
+  return <GameStatsProvider statsView={UserStatsV2}
+                            homeView={HomePage} />
 }
 
 export default App;

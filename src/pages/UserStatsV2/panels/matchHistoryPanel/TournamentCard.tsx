@@ -1,8 +1,8 @@
-import {TournamentStat} from "@common/sdk/finals-tracker";
 import {RoundCard} from "./RoundCard";
 import {Divider, Stack, Table, Typography} from "@mui/joy";
 import {useMemo} from "react";
 import {getMapName} from "@common/util";
+import {TournamentStat} from "@common/stores/gameStatsStore";
 
 export interface TournamentCardProps {
   data: TournamentStat

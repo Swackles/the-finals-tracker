@@ -1,10 +1,8 @@
-import {TournamentStat} from "@common/sdk/finals-tracker";
 import {TournamentCard} from "./TournamentCard";
+import {useGameStatsStore} from "@common/stores/gameStatsStore";
 
-export interface MatchHistoryPanelProps {
-    tournaments: TournamentStat[]
-}
+export const MatchHistoryPanel = () => {
+    const { tournaments } = useGameStatsStore()
 
-export const MatchHistoryPanel = ({ tournaments }: MatchHistoryPanelProps) => {
     return tournaments.map(tournament => <TournamentCard key={tournament.id} data={tournament} />)
 }

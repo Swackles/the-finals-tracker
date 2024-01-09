@@ -1,30 +1,31 @@
 import {WeaponsTableCard} from "./WeaponsTableCard";
-import {GameLoadoutAsset, GameLoadoutAssetArchetype, GameLoadoutAssetType} from "@common/sdk/finals-tracker";
 import {useMemo, useState} from "react";
 import {Filter} from "@common/components";
 import Stack from "@mui/joy/Stack";
+import {useGameStatsStore} from "@common/stores/gameStatsStore";
+import {Archetype} from "@common/models";
+import {GameLoadoutAssetType} from "@common/util";
+import {observer} from "mobx-react";
 
-export interface WeaponsPanelProps {
-  weaponTableData: GameLoadoutAsset[]
-}
+export const WeaponsPanel = observer(() => {
+  const { weapons } = useGameStatsStore()
 
-export const WeaponsPanel = ({ weaponTableData }: WeaponsPanelProps) => {
   const [activeArchtypeFilters, setActiveArchtypeFilters] = useState("All")
   const [activeTypeFilters, setActiveTypeFilters] = useState("All")
 
   const filteredData = useMemo(() =>
-    weaponTableData.filter(data =>
+      weapons.filter(data =>
       (activeArchtypeFilters === "All" || data.archetype === activeArchtypeFilters)
       && (activeTypeFilters === "All" || data.type === activeTypeFilters)
     )
-  , [weaponTableData, activeArchtypeFilters, activeTypeFilters])
+  , [weapons, activeArchtypeFilters, activeTypeFilters])
 
   const archtypeFilters = [
     "All",
-    GameLoadoutAssetArchetype.LIGHT,
-    GameLoadoutAssetArchetype.MEDIUM,
-    GameLoadoutAssetArchetype.HEAVY,
-    GameLoadoutAssetArchetype.SHARED
+    Archetype.LIGHT,
+    Archetype.MEDIUM,
+    Archetype.HEAVY,
+    Archetype.SHARED
   ]
 
   const typeFilters = [
@@ -34,16 +35,16 @@ export const WeaponsPanel = ({ weaponTableData }: WeaponsPanelProps) => {
   ]
 
   const {disabledArchtype, disabledTypes} = useMemo(() => {
-    const archetypes = weaponTableData
+    const archetypes = weapons
       .map((data) => data.archetype)
-    const types = weaponTableData
+    const types = weapons
       .map((data) => data.type)
 
     return {
       disabledArchtype: [...archtypeFilters.filter(x => x !== "All" && !archetypes.includes(x as any))],
       disabledTypes:  [...typeFilters.filter(x => x !== "All" && !types.includes(x as any))],
     }
-  }, [weaponTableData])
+  }, [weapons])
 
 
     return (
@@ -66,4 +67,4 @@ export const WeaponsPanel = ({ weaponTableData }: WeaponsPanelProps) => {
         <WeaponsTableCard data={filteredData} />
       </>
     )
-}
+})

@@ -1,5 +1,4 @@
 import {Tab, tabClasses, TabList, Tabs} from "@mui/joy";
-import {GameMode} from "@common/sdk/finals-tracker";
 
 export interface FilterProps<T = string> {
   defaultValue: T
@@ -13,7 +12,7 @@ export const Filter = ({defaultValue, values, disableValues = [], onChange}: Fil
     <Tabs aria-label="tabs"
           defaultValue={defaultValue}
           sx={{ bgcolor: 'transparent' }}
-          onChange={(_ , val) => onChange(val as GameMode)} >
+          onChange={(_ , val) => onChange(val as string)} >
       <TabList
         disableUnderline
         sx={{
