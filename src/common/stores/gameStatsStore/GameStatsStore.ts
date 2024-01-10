@@ -138,7 +138,7 @@ export class GameStatsStore implements Store {
       ...Object.keys(roundWinRatePerArchetype),
       ...Object.keys(timePlayedPerArchetype),
       ...Object.keys(tournamentWinRatePerArchetype)
-    ].filter((value, i, arr) => arr.indexOf(value) === i) as Array<keyof GamePerArchetype>)
+    ].filter((value, i, arr) => arr.indexOf(value) === i && value != "") as Array<keyof GamePerArchetype>)
       .map(key => {
           const type = mapArchetype(key)
           const {kills, damage} = this.weapons
