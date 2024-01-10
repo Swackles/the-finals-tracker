@@ -64,11 +64,11 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
             backgroundColor: 'var(--joy-palette-background-backdrop)',
             transition: 'opacity 0.4s',
             transform: {
-              xs: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))',
+              xs: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * calc(var(--Sidebar-width, 0px) + 33px)))',
               lg: 'translateX(-100%)',
             },
           }}
-          onClick={() => closeSidebar}
+          onClick={() => closeSidebar()}
         />
         <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
           <Typography level="title-lg">The Finals Tracker</Typography>

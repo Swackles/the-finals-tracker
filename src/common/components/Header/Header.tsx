@@ -1,11 +1,17 @@
 import * as React from 'react';
 import Sheet from '@mui/joy/Sheet';
-import {Button, FormControl, FormHelperText, Stack, Typography, useTheme} from "@mui/joy";
+import {Button, FormControl, FormHelperText, IconButton, Stack, Typography, useTheme} from "@mui/joy";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import {useGameStatsStore} from "@common/stores/gameStatsStore";
 import {ChangeEvent, useCallback, useState} from "react";
+import MenuIcon from '@mui/icons-material/Menu';
+import { toggleSidebar } from "./helper";
 
-export default function Header() {
+export interface HeaderProps {
+  compact?: boolean
+}
+
+export default function Header({ compact }: HeaderProps) {
   const theme = useTheme()
   const { setJson } = useGameStatsStore()
 
@@ -38,26 +44,34 @@ export default function Header() {
         zIndex: 9995,
         gap: 1,
         width: "100vw",
-        backgroundColor: theme.vars.palette.primary[600]
+        backgroundColor: compact ? "#FFF" : theme.vars.palette.primary[600]
       }}
     >
       <Stack
         direction="row"
-        justifyContent={{ xs: "flex-end", md: "space-between" }}
+        justifyContent={{ xs: compact ? "space-between" : "flex-end", md: "space-between" }}
         alignItems="center"
         spacing={0}
-        sx={{ p: 7,}}
+        sx={{ p: compact ? 3 : 7 }}
       >
-        <Typography level="h1"
-                    sx={{
-                      color: "#FFF",
-                      display: {
-                        xs: "none",
-                        md: "block"
-                      }
-                    }}>
+        {!compact && <Typography level="h1"
+                     sx={{
+                       color: "#FFF",
+                       display: {
+                         xs: "none",
+                         md: "block"
+                       }
+                     }}>
           THE FINALS TRACKER
-        </Typography>
+        </Typography>}
+        {compact && <IconButton
+          onClick={() => toggleSidebar()}
+          variant="outlined"
+          color="neutral"
+          size="sm"
+        >
+          <MenuIcon/>
+        </IconButton>}
         <Stack
           direction="row"
           justifyContent="flex-end"
@@ -78,7 +92,7 @@ export default function Header() {
             {fileError && <FormHelperText><InfoOutlined/> {fileError}</FormHelperText>}
           </FormControl>
           <a href="https://github.com/Swackles/the-finals-tracker" target="_blank">
-            <img style={{ width: 35, height: 35}} src={"/github-mark-white.svg"}/>
+            <img style={{ width: 35, height: 35 }} src={compact ? "/github-mark.svg" : "/github-mark-white.svg"}/>
           </a>
         </Stack>
       </Stack>
