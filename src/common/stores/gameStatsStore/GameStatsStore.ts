@@ -151,7 +151,7 @@ export class GameStatsStore implements Store {
           return {
             type,
             kills,
-            damage,
+            damage: Math.round(damage / 100_000),
             roundWinRate: roundWinRatePerArchetype[key] || 0,
             tournamentWinRate: roundWinRatePerArchetype[key] || 0,
             timePlayed: timePlayedPerArchetype[key] || 0
