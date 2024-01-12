@@ -29,10 +29,11 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
         },
         transition: 'transform 0.4s, width 0.4s',
         zIndex: 10000,
-        height: '100dvh',
+        height: '100vh',
         width: 'var(--Sidebar-width)',
         top: 0,
-        p: 2,
+        pr: 2,
+        pl: 2,
         flexShrink: 0,
         display: 'flex',
         flexDirection: 'column',
@@ -70,7 +71,7 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
           }}
           onClick={() => closeSidebar()}
         />
-        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', gap: 1, pt: 2, alignItems: 'center' }}>
           <Typography level="title-lg">The Finals Tracker</Typography>
         </Box>
         <Box
