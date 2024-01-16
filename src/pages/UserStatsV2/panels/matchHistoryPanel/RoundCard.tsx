@@ -2,7 +2,7 @@ import {AspectRatio, Card, CardContent, CardOverflow, Divider, Skeleton, Stack, 
 import React from "react";
 import {RoundCardText} from "./RoundCardText"
 import {getMapVariant} from "@common/util";
-import {TournamentRound} from "@common/stores/gameStatsStore";
+import {TournamentRound} from "@common/util/mapGameStats";
 
 export interface RoundCardProps {
   data?: TournamentRound
@@ -17,9 +17,9 @@ export const RoundCard = ({ data }: RoundCardProps) => {
         <AspectRatio ratio="16/9">
           <Skeleton animation={false} loading={isLoading}>
             <img
-              src={data ? `/images/maps/${data.map}.png` : ""}
+              src={data ? `/images/maps/${data.mapVariant}.png` : ""}
               loading="lazy"
-              alt={data?.map || "loading..."}
+              alt={data?.mapVariant || "loading..."}
             />
           </Skeleton>
         </AspectRatio>
@@ -31,7 +31,7 @@ export const RoundCard = ({ data }: RoundCardProps) => {
               textShadow: "1px 1px 5px white",
               position: "absolute",
               textAlign: "center"
-            }}  level="h4" color={data.won ? "success" : "danger"}>{getMapVariant(data.map)}</Typography>
+            }}  level="h4" color={data.won ? "success" : "danger"}>{getMapVariant(data.mapVariant)}</Typography>
         }
         <Divider inset="context" />
         <CardContent orientation="horizontal">

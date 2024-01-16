@@ -1,4 +1,3 @@
-export * from "./ArchetypeGameStats"
 export * from "./MatchesStats"
 export * from "./TournamentStat"
 export * from "./WeaponStat"

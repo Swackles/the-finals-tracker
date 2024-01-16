@@ -1,7 +1,6 @@
-import {MapVariant} from "./MapVariant"
-import {GameMode} from "./GameMode"
+import {MapVariant, GameMode} from "@common/models"
 
-interface SharedProfile {
+export interface SharedProfile {
   embarkName: string
   steamName: string
 }

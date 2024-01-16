@@ -29,10 +29,11 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
         },
         transition: 'transform 0.4s, width 0.4s',
         zIndex: 10000,
-        height: '100dvh',
+        height: '100vh',
         width: 'var(--Sidebar-width)',
         top: 0,
-        p: 2,
+        pr: 2,
+        pl: 2,
         flexShrink: 0,
         display: 'flex',
         flexDirection: 'column',
@@ -64,13 +65,13 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
             backgroundColor: 'var(--joy-palette-background-backdrop)',
             transition: 'opacity 0.4s',
             transform: {
-              xs: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))',
+              xs: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * calc(var(--Sidebar-width, 0px) + 33px)))',
               lg: 'translateX(-100%)',
             },
           }}
-          onClick={() => closeSidebar}
+          onClick={() => closeSidebar()}
         />
-        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', gap: 1, pt: 2, alignItems: 'center' }}>
           <Typography level="title-lg">The Finals Tracker</Typography>
         </Box>
         <Box
@@ -92,7 +93,7 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
               '--ListItem-radius': (theme) => theme.vars.radius.sm,
             }} >
               <ListItem>
-                <ListItemButton selected={activeTab === "overview"} onClick={() => setActiveTab("overview")}>
+                <ListItemButton color={activeTab === "overview" ? "primary" : "neutral"} selected={activeTab === "overview"} onClick={() => setActiveTab("overview")}>
                   <DashboardRoundedIcon />
                   <ListItemContent>
                   <Typography level="title-sm">Overview</Typography>
@@ -101,7 +102,7 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
               </ListItem>
 
               <ListItem>
-                <ListItemButton selected={activeTab === "weapons"} onClick={() => setActiveTab("weapons")}>
+                <ListItemButton color={activeTab === "weapons" ? "primary" : "neutral"} selected={activeTab === "weapons"} onClick={() => setActiveTab("weapons")}>
                   <ListItemContent>
                     <Typography level="title-sm">Weapons</Typography>
                   </ListItemContent>
@@ -109,7 +110,7 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
               </ListItem>
 
               <ListItem>
-                <ListItemButton selected={activeTab === "match-history"} onClick={() => setActiveTab("match-history")}>
+                <ListItemButton color={activeTab === "match-history" ? "primary" : "neutral"} selected={activeTab === "match-history"} onClick={() => setActiveTab("match-history")}>
                   <EmojiEventsIcon />
                   <ListItemContent>
                     <Typography level="title-sm">Match History</Typography>

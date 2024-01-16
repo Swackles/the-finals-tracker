@@ -8,17 +8,17 @@ import {GameLoadoutAssetType} from "@common/util";
 import {observer} from "mobx-react";
 
 export const WeaponsPanel = observer(() => {
-  const { weapons } = useGameStatsStore()
+  const { loadoutItems } = useGameStatsStore()
 
   const [activeArchtypeFilters, setActiveArchtypeFilters] = useState("All")
   const [activeTypeFilters, setActiveTypeFilters] = useState("All")
 
   const filteredData = useMemo(() =>
-      weapons.filter(data =>
+      loadoutItems.filter(data =>
       (activeArchtypeFilters === "All" || data.archetype === activeArchtypeFilters)
       && (activeTypeFilters === "All" || data.type === activeTypeFilters)
     )
-  , [weapons, activeArchtypeFilters, activeTypeFilters])
+  , [loadoutItems, activeArchtypeFilters, activeTypeFilters])
 
   const archtypeFilters = [
     "All",
@@ -35,16 +35,16 @@ export const WeaponsPanel = observer(() => {
   ]
 
   const {disabledArchtype, disabledTypes} = useMemo(() => {
-    const archetypes = weapons
+    const archetypes = loadoutItems
       .map((data) => data.archetype)
-    const types = weapons
+    const types = loadoutItems
       .map((data) => data.type)
 
     return {
       disabledArchtype: [...archtypeFilters.filter(x => x !== "All" && !archetypes.includes(x as any))],
       disabledTypes:  [...typeFilters.filter(x => x !== "All" && !types.includes(x as any))],
     }
-  }, [weapons])
+  }, [loadoutItems])
 
 
     return (
