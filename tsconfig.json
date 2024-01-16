@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "es2015",
     "lib": [
@@ -21,9 +20,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "experimentalDecorators": true,
+    "useDefineForClassFields": true,
     "sourceMap": true,
     "inlineSources": true,
-    "sourceRoot": "/"
+    "sourceRoot": "/",
+    "baseUrl": "./src",
+    "paths": {
+      "@common/*": ["./common/*"]
+    }
   },
   "include": [
     "src/**/*"
