@@ -1,6 +1,5 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {GameStatsStore} from "./GameStatsStore";
-import {useStore} from "@common/stores";
 import {observer} from "mobx-react";
 
 const GameStatsStoreContext = React.createContext<GameStatsStore>({
@@ -14,7 +13,7 @@ export interface GameStatsProviderProps {
 }
 
 export const GameStatsProvider = observer(({ homeView: HomeView, statsView: StatsView }: GameStatsProviderProps) => {
-  const store = useStore(GameStatsStore.new)
+  const [store] = useState(GameStatsStore.new)
 
   return (
     <GameStatsStoreContext.Provider value={store}>

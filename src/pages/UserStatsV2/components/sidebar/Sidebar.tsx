@@ -93,7 +93,7 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
               '--ListItem-radius': (theme) => theme.vars.radius.sm,
             }} >
               <ListItem>
-                <ListItemButton selected={activeTab === "overview"} onClick={() => setActiveTab("overview")}>
+                <ListItemButton color={activeTab === "overview" ? "primary" : "neutral"} selected={activeTab === "overview"} onClick={() => setActiveTab("overview")}>
                   <DashboardRoundedIcon />
                   <ListItemContent>
                   <Typography level="title-sm">Overview</Typography>
@@ -102,7 +102,7 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
               </ListItem>
 
               <ListItem>
-                <ListItemButton selected={activeTab === "weapons"} onClick={() => setActiveTab("weapons")}>
+                <ListItemButton color={activeTab === "weapons" ? "primary" : "neutral"} selected={activeTab === "weapons"} onClick={() => setActiveTab("weapons")}>
                   <ListItemContent>
                     <Typography level="title-sm">Weapons</Typography>
                   </ListItemContent>
@@ -110,7 +110,7 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
               </ListItem>
 
               <ListItem>
-                <ListItemButton selected={activeTab === "match-history"} onClick={() => setActiveTab("match-history")}>
+                <ListItemButton color={activeTab === "match-history" ? "primary" : "neutral"} selected={activeTab === "match-history"} onClick={() => setActiveTab("match-history")}>
                   <EmojiEventsIcon />
                   <ListItemContent>
                     <Typography level="title-sm">Match History</Typography>

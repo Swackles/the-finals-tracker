@@ -3,37 +3,39 @@ import Sheet from '@mui/joy/Sheet';
 import {Button, FormControl, FormHelperText, IconButton, Stack, Typography, useTheme} from "@mui/joy";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import {useGameStatsStore} from "@common/stores/gameStatsStore";
-import {ChangeEvent, useCallback, useState} from "react";
+import {ChangeEvent, useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import { toggleSidebar } from "./helper";
+import {observer} from "mobx-react";
 
 export interface HeaderProps {
   compact?: boolean
 }
 
-export default function Header({ compact }: HeaderProps) {
+const Header = observer(({ compact }: HeaderProps) => {
   const theme = useTheme()
-  const { setJson } = useGameStatsStore()
+  const { setJson, error } = useGameStatsStore()
 
   const [fileError, setFileError] = useState<string>()
 
-  const onFileInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const onFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
-    setFileError(undefined)
 
     reader.readAsText(e.target.files![0], "UTF-8");
     reader.onload = event => {
       try {
         setJson(JSON.parse(event.target!.result as string))
+        setFileError(undefined)
       } catch (e) {
+        console.log(e)
         setFileError((e as Error).message)
       }
     }
     reader.onerror = event => {
       console.error(event)
-      setFileError("Error occured when parsing the file")
+      setFileError("Error occured reading the file")
     }
-  }, [setJson, setFileError])
+  }
 
   return (
     <Sheet
@@ -81,7 +83,7 @@ export default function Header({ compact }: HeaderProps) {
           <Button size="lg" component="a" target="_blank" href="https://the-finals-leaderboard.leonlarsson.com/" color="neutral">
             Leaderboard
           </Button>
-          <FormControl error={!!fileError} sx={{ width: "100%" }} >
+          <FormControl error={true} sx={{ width: "100%" }} >
             <Button size="lg" color="neutral" component="label">
               Upload JSON
               <input type="file"
@@ -89,7 +91,7 @@ export default function Header({ compact }: HeaderProps) {
                      hidden
                      onChange={onFileInput} />
             </Button>
-            {fileError && <FormHelperText><InfoOutlined/> {fileError}</FormHelperText>}
+            {(error || fileError) && <FormHelperText><InfoOutlined/> {error || fileError}</FormHelperText>}
           </FormControl>
           <a href="https://github.com/Swackles/the-finals-tracker" target="_blank">
             <img style={{ width: 35, height: 35 }} src={compact ? "/github-mark.svg" : "/github-mark-white.svg"}/>
@@ -98,4 +100,6 @@ export default function Header({ compact }: HeaderProps) {
       </Stack>
     </Sheet>
   );
-}
+})
+
+export default Header

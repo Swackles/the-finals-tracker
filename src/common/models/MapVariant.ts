@@ -1,3 +1,10 @@
+export enum Map {
+  MONACO = "Monaco",
+  SOUL = "Seoul",
+  SKYWAY_STADIUM = "Skyway Stadium",
+  LAS_VEGAS = "Las Vegas"
+}
+
 export enum MapVariant {
   MONACO_BASE = "DA_MV_Monaco_01_Base",
   MONACO_DUCK_AND_COVER = "DA_MV_Monaco_01_DuckAndCover",
