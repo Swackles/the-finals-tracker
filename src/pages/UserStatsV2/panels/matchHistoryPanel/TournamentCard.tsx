@@ -1,7 +1,6 @@
 import {RoundCard} from "./RoundCard";
 import {Divider, Stack, Table, Typography} from "@mui/joy";
 import {useMemo} from "react";
-import {getMapName} from "@common/util";
 import {Tournament} from "@common/util/mapGameStats";
 
 export interface TournamentCardProps {
@@ -38,7 +37,7 @@ export const TournamentCard = ({ data }: TournamentCardProps) => {
   return (
     <Stack direction="column" spacing={3}>
       <Typography level="h2">
-        <Typography color={data.won ? "success" : "danger"}>{getMapName(data.map)}</Typography>
+        <Typography color={data.won ? "success" : "danger"}>{data.map}</Typography>
         <Typography level="body-xs"> ({data.id})</Typography>
       </Typography>
       <Table

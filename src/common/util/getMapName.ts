@@ -1,13 +1,5 @@
 const MAP_REGEX = /DA_MV_(.*?)_[0-9]+_(.*?)$/g;
 
-export const getMapName = (fullMapName: string): string => {
-  let [[_, map]] = fullMapName.matchAll(MAP_REGEX);
-  map = map.replace(/([a-z])([A-Z])/g, '$1 $2');
-
-  if (map === "Arena") return "Skyway Stadium"
-  else return map
-}
-
 export const getMapVariant = (fullMapName: string): string => {
   let [[_, map, variant]] = fullMapName.matchAll(MAP_REGEX);
   map = map.replace(/([a-z])([A-Z])/g, '$1 $2');
