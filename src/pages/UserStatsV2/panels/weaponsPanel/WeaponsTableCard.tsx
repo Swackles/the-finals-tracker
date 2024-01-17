@@ -9,21 +9,22 @@ export interface WeaponsTableProps {
 export const WeaponsTableCard = ({ data }: WeaponsTableProps) => {
   return (
     <Card
-      variant="outlined"
+      variant="soft"
       orientation="vertical" >
       <CardOverflow sx={{ padding: 0 }}>
         <Table
-          sx={{ '& tr > *:not(:first-child)': { textAlign: 'center' }, '& tr > *:first-child': { textAlign: 'left' } }}
+          sx={{
+            '& tr > *:not(:first-child)': { textAlign: 'center' },
+            '& tr > *:first-child': { textAlign: 'left' },
+            "& td:first-child, & th:first-child": { pl: 2 },
+            "& td:last-child, & th:last-child": { pr: 2 }
+          }}
           borderAxis="xBetween"
           size="md"
-          stickyFooter={false}
-          stickyHeader={false}
-          stripe="even"
-          variant="plain"
         >
           <thead>
           <tr>
-            <th>Weapon</th>
+            <th style={{ width: "35%" }}>Weapon</th>
             <th>Class</th>
             <th>Type</th>
             <th>Kills</th>
@@ -46,7 +47,7 @@ export const WeaponsTableCard = ({ data }: WeaponsTableProps) => {
               <td>{x.archetype}</td>
               <td>{x.type}</td>
               <td>{x.kills}</td>
-              <td>{x.damage}</td>
+              <td>{Math.round(x.damage)}</td>
             </tr>
           ))}
           </tbody>
